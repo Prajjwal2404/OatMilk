@@ -1,0 +1,89 @@
+.intro-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20rem;
+    overflow: hidden;
+    margin-top: 5rem;
+    margin-bottom: 50rem;
+}
+
+.intros-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
+}
+
+.about-div {
+    width: 25rem;
+    height: 16.15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.about-div h1 {
+    width: 100%;
+    text-align: start;
+}
+
+.about-div p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.oat-div,
+.bottle-div,
+.person-div {
+    width: 15rem;
+    height: 18.75rem;
+}
+
+.person-div {
+    transform: translate(2rem, 2rem);
+}
+
+@media screen and (max-width: 850px) {
+    .intros-div {
+        gap: 5rem;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .intros-div {
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .intros-div {
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .about-div {
+        width: 18rem;
+        height: 21.8rem;
+    }
+
+    .about-div h1,
+    .about-div p {
+        text-align: center;
+    }
+
+    .oat-div,
+    .bottle-div,
+    .person-div {
+        width: 10rem;
+        height: 12.5rem;
+    }
+
+    .person-div {
+        transform: translate(0);
+    }
+}
