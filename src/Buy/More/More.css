@@ -1,0 +1,43 @@
+.more-nav {
+    width: clamp(22.5rem, 85%, 24rem);
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    border: 2px solid black;
+    margin-inline: auto;
+    background-color: #f0f0f0;
+}
+
+.more-nav a {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+
+.more-nav a div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 30px;
+}
+
+.more-item-icon {
+    font-size: 1.15rem;
+}
+
+.more-nav a div p {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.more-nav a.active div {
+    background-color: black;
+    color: #eaeaea;
+}

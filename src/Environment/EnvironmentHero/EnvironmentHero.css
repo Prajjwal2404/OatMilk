@@ -1,0 +1,82 @@
+.environment-hero-container {
+    width: 100%;
+    height: var(--hero-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.environment-hero-container .environment-img-div {
+    width: clamp(20rem, 75%, 30rem);
+    position: relative;
+}
+
+.environment-img-div .hero {
+    width: 100%;
+    -webkit-mask-image: url(../../Img/logo.svg);
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url(../../Img/logo.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+}
+
+.leaf1 {
+    position: absolute;
+    width: 16.66%;
+    top: -4%;
+    right: -3.5%;
+    transform-origin: bottom;
+    filter: drop-shadow(-10px 10px 10px rgba(0, 0, 0, 0.65));
+    animation: leaf1 6s linear infinite forwards;
+}
+
+@keyframes leaf1 {
+    50% {
+        transform: rotate(15deg);
+    }
+}
+
+.leaf2 {
+    position: absolute;
+    width: 13.33%;
+    top: 13%;
+    right: -9%;
+    transform-origin: left;
+    filter: drop-shadow(-10px 10px 10px rgba(0, 0, 0, 0.65));
+    animation: leaf2 6s linear infinite forwards;
+}
+
+@keyframes leaf2 {
+    50% {
+        transform: rotate(-15deg);
+    }
+}
+
+.env-scroll {
+    bottom: 8rem;
+    animation-name: env-arrows;
+}
+
+.env-scroll::before,
+.env-scroll::after {
+    animation-name: env-arrows;
+}
+
+@keyframes env-arrows {
+    33% {
+        border-left-color: darkgreen;
+        border-bottom-color: darkgreen;
+    }
+
+    66% {
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .environment-hero-container {
+        padding-bottom: 6.13rem;
+    }
+}

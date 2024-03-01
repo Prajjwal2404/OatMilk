@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
-import Oat from '../Illustrations/Oat'
-import Bottle from '../Illustrations/Bottle'
-import Person from '../Illustrations/Person'
-import useRem from '../Utils/Rem'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Oat from '../../Illustrations/Oat'
+import Bottle from '../../Illustrations/Bottle'
+import Person from '../../Illustrations/Person'
+import useRem from '../../Utils/Rem'
 import './Intro.css'
 
 export default function Intro() {
@@ -12,20 +12,20 @@ export default function Intro() {
     const ref = useRef()
 
     const width = window.innerWidth
-    const yOffset = width > 600 ? 0 : 0.03
-    const isDesktop = width > 600 ? true : false
+    const yOffset = width > 650 ? 0 : 0.035
+    const isDesktop = width > 650 ? true : false
 
 
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
 
-    const xOat = useTransform(scrollYProgress, [(0.56 - yOffset), (0.83 - yOffset)], [((isDesktop ? 2 : 0) * rem), ((isDesktop ? 6.25 : 2) * rem)])
-    const yOat = useTransform(scrollYProgress, [(0.26 - yOffset), (0.53 - yOffset), (0.56 - yOffset), (0.83 - yOffset)], [((isDesktop ? 2 : 0) * rem), (41.5 * rem), (41.5 * rem), ((isDesktop ? 73.65 : 79.25) * rem)])
-    const scaleOat = useTransform(scrollYProgress, [(0.26 - yOffset), (0.53 - yOffset), (0.56 - yOffset), (0.83 - yOffset)], [1, 0.45, 0.45, 0.16])
+    const xOat = useTransform(scrollYProgress, [(0.56 - yOffset), (0.81 - yOffset)], [((isDesktop ? 2 : 0) * rem), ((isDesktop ? 4.25 : 2) * rem)])
+    const yOat = useTransform(scrollYProgress, [(0.26 - yOffset), (0.53 - yOffset), (0.56 - yOffset), (0.81 - yOffset)], [(2 * rem), ((isDesktop ? 41.5 : 43.5) * rem), ((isDesktop ? 41.5 : 43.5) * rem), ((isDesktop ? 73.65 : 80.75) * rem)])
+    const scaleOat = useTransform(scrollYProgress, [(0.26 - yOffset), (0.53 - yOffset), (0.56 - yOffset), (0.81 - yOffset)], [1, 0.45, 0.45, 0.16])
     const opacityBottle = useTransform(scrollYProgress, [(0.38 - yOffset), (0.53 - yOffset)], [0, 1])
-    const xBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.83 - yOffset)], [((isDesktop ? 2 : 0) * rem), ((isDesktop ? 6 : 1.85) * rem)])
-    const yBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.83 - yOffset)], [((isDesktop ? 2 : 0) * rem), ((isDesktop ? 35 : 38.25) * rem)])
-    const scaleBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.83 - yOffset)], [1, 0.3])
-    const rotateBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.83 - yOffset)], [0, -115])
+    const xBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.81 - yOffset)], [((isDesktop ? 2 : 0) * rem), ((isDesktop ? 4 : 1.85) * rem)])
+    const yBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.81 - yOffset)], [(2 * rem), ((isDesktop ? 35 : 39.75) * rem)])
+    const scaleBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.81 - yOffset)], [1, 0.3])
+    const rotateBottle = useTransform(scrollYProgress, [(0.56 - yOffset), (0.81 - yOffset)], [0, -115])
 
     function AboutOpacity(yStart, yEnter, yExit, yEnd) {
         return useTransform(scrollYProgress, [yStart, yEnter, yExit, yEnd], [0, 1, 1, 0])
@@ -39,8 +39,8 @@ export default function Intro() {
     const xAboutOat = AboutX((0.03 - yOffset), (0.23 - yOffset), (0.26 - yOffset), (0.46 - yOffset))
     const opacityAboutOatMilk = AboutOpacity((0.33 - yOffset), (0.53 - yOffset), (0.56 - yOffset), (0.76 - yOffset))
     const xAboutOatMilk = AboutX((0.33 - yOffset), (0.53 - yOffset), (0.56 - yOffset), (0.76 - yOffset))
-    const opacityAboutWhyOatMilk = AboutOpacity((0.63 - yOffset), (0.83 - yOffset), 1, 1.1)
-    const xAboutWhyOatMilk = AboutX((0.63 - yOffset), (0.83 - yOffset), 1, 1.1)
+    const opacityAboutWhyOatMilk = AboutOpacity((0.63 - yOffset), (0.81 - yOffset), 1, 1.1)
+    const xAboutWhyOatMilk = AboutX((0.63 - yOffset), (0.81 - yOffset), 1, 1.1)
 
     return (
         <div className='intro-container' ref={ref}>

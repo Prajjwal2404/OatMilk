@@ -7,14 +7,14 @@
     gap: 20rem;
     overflow: hidden;
     margin-top: 5rem;
-    margin-bottom: 50rem;
+    margin-bottom: 5rem;
 }
 
 .intros-div {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10rem;
+    gap: clamp(1rem, 17.1765vw - 97.6464px, 10rem);
 }
 
 .about-div {
@@ -45,24 +45,11 @@
 }
 
 .person-div {
-    transform: translate(2rem, 2rem);
+    transform: translateY(2rem);
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 650px) {
     .intros-div {
-        gap: 5rem;
-    }
-}
-
-@media screen and (max-width: 750px) {
-    .intros-div {
-        gap: 2rem;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .intros-div {
-        gap: 1rem;
         flex-direction: column;
     }
 
@@ -84,6 +71,6 @@
     }
 
     .person-div {
-        transform: translate(0);
+        transform: translate(0, 2rem);
     }
 }

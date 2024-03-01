@@ -1,0 +1,154 @@
+.footer-wrapper {
+    container-type: inline-size;
+    width: 100%;
+}
+
+.footer-container {
+    height: 8.75rem;
+    background-color: black;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 2rem;
+    padding-inline: clamp(1.5rem, 9.8333% - 67.5008px, 5rem);
+    color: #eaeaea;
+}
+
+.footer-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.contact,
+.legal-stuff {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.socials-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.socials-div a {
+    font-size: 1.26rem;
+    height: 1.26rem;
+    transition: transform 0.25s ease;
+}
+
+.socials-div a:hover {
+    transform: scale(1.1);
+}
+
+.socials-div a:active {
+    transform: scale(0.95);
+}
+
+.socials-div .portfolio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border-radius: 30px;
+    background-color: #333366;
+    min-height: calc(1.24rem + 3px);
+    padding-right: 0.5rem;
+    padding-left: 1.5px;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.socials-div a.portfolio:hover {
+    text-decoration: none;
+    transform: scale(1);
+    background-color: #27274d;
+}
+
+.socials-div a.portfolio:active {
+    transform: scale(0.95);
+}
+
+.socials-div .portfolio img {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.socials-div .portfolio h6 {
+    font-weight: 500;
+    margin-bottom: 1.5px;
+}
+
+.legal-links {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: start;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+}
+
+.legal-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.logo-div {
+    width: 7rem;
+}
+
+.logo {
+    fill: #eaeaea;
+}
+
+@media (pointer: coarse) {
+    .socials-div a:hover {
+        transform: scale(1);
+    }
+
+    .socials-div a:active {
+        transform: scale(0.95);
+    }
+
+    .socials-div a.portfolio:hover {
+        background-color: #333366;
+    }
+
+    .socials-div a.portfolio:active {
+        background-color: #27274d;
+    }
+}
+
+@container (max-width: 750px) {
+    .logo-div {
+        display: none;
+    }
+}
+
+@container (max-width: 600px) {
+
+    .footer-container {
+        height: 13.91rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact,
+    .legal-stuff {
+        align-items: center;
+    }
+
+    .legal-links {
+        justify-items: center;
+    }
+
+}

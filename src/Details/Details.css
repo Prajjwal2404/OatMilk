@@ -1,0 +1,224 @@
+.details-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+    gap: 2rem;
+    padding-inline: 2rem;
+    position: relative;
+}
+
+.buy-back-icon {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    z-index: 98;
+    font-size: 1.25rem;
+    color: #eaeaea;
+    background-color: #000;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.buy-back-icon:hover {
+    background-color: #353535;
+}
+
+.buy-back-icon:active {
+    transform: scale(0.95);
+}
+
+.details-content-container {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.details-content-container>h1 {
+    font-size: 2.25rem;
+}
+
+.review-rating-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.rating-div {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.details-rating {
+    font-size: 1.15rem;
+}
+
+.review-rating-div p {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.details-content-container>h2 span {
+    font-size: 0.95rem;
+}
+
+.details-content-container>p {
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 150%;
+}
+
+.quantity-size {
+    display: flex;
+    gap: 4rem;
+}
+
+.size-container p {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.subscribe-div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.subscribe-div>label {
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.subscribe-div>label p {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+.subscribe-div>label input {
+    height: 1.5rem;
+    width: 1.5rem;
+    accent-color: #000;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.subscribe-div>label input:active {
+    transform: scale(0.95);
+}
+
+.subscribe-div>p {
+    position: absolute;
+    left: 0;
+    top: 105%;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.frequency-div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+}
+
+.frequency-div>p {
+    position: absolute;
+    bottom: 125%;
+    right: 0;
+    z-index: 1;
+    background: #ededed;
+    border-radius: 6.5px;
+    box-shadow: 0 0 30px #c0c0c0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 150%;
+    white-space: nowrap;
+    padding: 0.35rem 0.65rem;
+    transform-origin: bottom right;
+    transform: scale(0);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+}
+
+.frequency-div .info-icon {
+    font-size: 1.15rem;
+    margin-bottom: 1px;
+    cursor: pointer;
+}
+
+.frequency-div .info-icon:hover+p {
+    transform: scale(1);
+}
+
+.details-content-container>button {
+    padding-block: 1rem;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #eaeaea;
+    background-color: #000;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.details-content-container>button:hover {
+    background-color: #353535;
+}
+
+.details-content-container>button:active {
+    transform: scale(0.95);
+}
+
+@media (pointer: coarse) {
+    .buy-back-icon:hover {
+        background-color: #000;
+    }
+
+    .buy-back-icon:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+
+    .details-content-container>button:hover {
+        background-color: #000;
+    }
+
+    .details-content-container>button:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .details-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .details-content-container {
+        width: min(30rem, 100%);
+    }
+}

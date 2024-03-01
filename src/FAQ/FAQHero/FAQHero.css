@@ -1,0 +1,26 @@
+.faq-hero-container {
+    width: 100%;
+    height: var(--hero-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 10rem;
+}
+
+.faq-img-wrapper {
+    width: clamp(20rem, 75%, 27rem);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.25));
+}
+
+.faq-logo {
+    width: 80%;
+}
+
+.question-mark {
+    width: 20%;
+    margin-top: 3%;
+}

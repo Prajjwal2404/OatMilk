@@ -1,0 +1,59 @@
+.categories {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    overflow-x: scroll;
+    scrollbar-width: 0;
+    padding-inline: 2rem;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.categories label input {
+    display: none;
+}
+
+.categories label span {
+    height: 2rem;
+    padding-inline: 0.6rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 2px solid #000;
+    border-radius: 10px;
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+.categories label span:hover {
+    background-color: rgba(215, 215, 215, 0.5);
+}
+
+.categories label input:checked~span {
+    border-color: #000;
+    background-color: #000;
+    color: #eaeaea;
+}
+
+@media screen and (max-width: 650px) {
+    .categories label span {
+        height: 2.25rem;
+        font-size: 1rem;
+    }
+}
+
+@media (pointer: coarse) {
+    .categories label span:hover {
+        background-color: transparent;
+    }
+
+    .categories label span:active {
+        background-color: rgba(215, 215, 215, 0.5);
+    }
+}

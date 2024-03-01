@@ -1,0 +1,182 @@
+.processes-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20rem;
+    overflow: hidden;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.processes-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 17.6vw - 104px, 10rem);
+}
+
+.process-about-div {
+    width: 25rem;
+    height: 8.125rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.process-about-div h1 {
+    width: 100%;
+    text-align: start;
+}
+
+.process-about-div p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.process-img-div {
+    width: 15rem;
+    height: 18.75rem;
+    position: relative;
+}
+
+.milling {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -71%);
+}
+
+.milled {
+    width: 66.66%;
+    height: 74.66%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.tap {
+    position: absolute;
+    width: 40%;
+    top: 8%;
+    left: 10%;
+}
+
+.container {
+    position: absolute;
+    width: 66.66%;
+    bottom: 10.66%;
+    left: 50%;
+    z-index: 1;
+}
+
+.beaker {
+    position: absolute;
+    width: 26.66%;
+    top: 8%;
+    left: 13.33%;
+}
+
+.filter {
+    position: absolute;
+    width: 53.33%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+}
+
+.filtered {
+    position: absolute;
+    width: 33.33%;
+    bottom: 25.6%;
+    right: -6.66%;
+    z-index: 1;
+}
+
+.salt {
+    position: absolute;
+    width: 26.66%;
+    top: 8%;
+    left: 13.33%;
+}
+
+.oil {
+    position: absolute;
+    width: 33.33%;
+    top: 2.6%;
+    right: 13.33%;
+}
+
+.bonfire {
+    position: absolute;
+    width: 40%;
+    bottom: 16%;
+    left: 50%;
+}
+
+.filling {
+    position: absolute;
+    width: 54.2%;
+    height: 44%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.filling::after,
+.filling::before {
+    content: '';
+    position: absolute;
+    border-top: 0.75rem solid transparent;
+    border-bottom: 0.75rem solid transparent;
+    border-left: 0.75rem solid #000;
+    top: -0.9rem;
+}
+
+.filling::after {
+    right: -0.1rem;
+    transform: rotate(45deg);
+}
+
+.filling::before {
+    left: -0.1rem;
+    transform: rotate(135deg);
+}
+
+.final-product {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+}
+
+.final-product img {
+    width: 20rem;
+}
+
+@media screen and (max-width: 650px) {
+    .processes-div {
+        flex-direction: column;
+    }
+
+    .process-about-div {
+        width: 18rem;
+        height: 8.125rem;
+    }
+
+    .process-about-div h1,
+    .process-about-div p {
+        text-align: center;
+    }
+
+    .process-img-div {
+        width: 12rem;
+        height: 15rem;
+    }
+}

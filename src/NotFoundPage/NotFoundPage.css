@@ -1,0 +1,54 @@
+.notfound-div {
+    height: calc(100svh - 8.75rem);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding-inline: 1.5rem;
+}
+
+.notfound-div h1 {
+    text-align: center;
+}
+
+.notfound-div a {
+    padding: 1rem 2rem;
+    background-color: #000;
+    border-radius: 10px;
+    color: #eaeaea;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.notfound-div a:hover {
+    background-color: #353535;
+}
+
+.notfound-div a:active {
+    transform: scale(0.95);
+}
+
+@media screen and (max-width: 650px) {
+    .notfound-div {
+        height: calc(100svh - 14.88rem);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .notfound-div {
+        height: calc(100svh - 20.04rem);
+    }
+}
+
+@media (pointer: coarse) {
+    .notfound-div a:hover {
+        background-color: #000;
+    }
+
+    .notfound-div a:active {
+        background-color: #353535;
+    }
+}

@@ -1,0 +1,171 @@
+.navigation {
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    backdrop-filter: blur(30px);
+    background-color: #f0f0f0b4;
+}
+
+.navigation:has(a.env-active) {
+    background-color: #eaf2edb4;
+}
+
+.logo-link {
+    width: 5rem;
+    flex-shrink: 0;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.pages a {
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.25s ease;
+}
+
+.pages a:active {
+    transform: scale(0.95);
+}
+
+.pages a.active {
+    color: darksalmon;
+}
+
+.pages a.env-active {
+    color: limegreen;
+}
+
+.buy-btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    background-color: #000;
+    border-radius: 10px;
+    color: #eaeaea;
+    text-decoration: none;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.buy-btn.active {
+    background-color: darksalmon;
+}
+
+.buy-btn:hover {
+    background-color: #353535;
+}
+
+.buy-btn.active:hover {
+    background-color: darksalmon;
+}
+
+.buy-btn:active {
+    transform: scale(0.95);
+}
+
+@media screen and (max-width: 650px) {
+
+    .wrapper-nav {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+    }
+
+    .navigation {
+        position: relative;
+        z-index: unset;
+        background-color: #f0f0f0;
+        backdrop-filter: none;
+        height: 5.13rem;
+    }
+
+    .navigation:has(a.env-active) {
+        background-color: #eaf2ed;
+    }
+
+    .pages {
+        background-color: inherit;
+        position: absolute;
+        top: -26rem;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        flex-direction: column;
+        gap: 1rem;
+        border-top: 2px solid #dadada;
+        padding: 1rem;
+        box-shadow: 0 100px 30px #eaeaea;
+        transition: top 0.5s ease;
+    }
+
+    .pages.open {
+        top: 100%;
+    }
+
+    .pages a {
+        padding: 1rem 0;
+        width: 100%;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .pages a.active {
+        background-color: darksalmon;
+        color: #f0f0f0;
+    }
+
+    .pages a.env-active {
+        background-color: limegreen;
+        color: #f0f0f0;
+    }
+
+    .menu-span {
+        cursor: pointer;
+        margin-right: auto;
+        transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .menu-icon {
+        font-size: 2rem;
+        pointer-events: none;
+    }
+
+    .menu-span:hover {
+        color: #353535;
+    }
+
+    .menu-span:active {
+        transform: scale(0.95);
+    }
+}
+
+@media (pointer: coarse) {
+    .buy-btn:hover {
+        background-color: #000;
+    }
+
+    .buy-btn:active {
+        background-color: #353535;
+    }
+
+    .menu-span:hover {
+        color: #000;
+    }
+
+    .menu-span:active {
+        color: #353535;
+    }
+}
