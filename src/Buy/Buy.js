@@ -40,7 +40,7 @@ export default function Buy() {
 
 function NavItems({ title, path, icon, classname, end, cartitems }) {
     return (
-        <NavLink to={path} end={end} className={({ isActive }) => isActive ? `active ${classname}` : classname} cartitems={cartitems}>
+        <NavLink to={path} end={end} className={({ isActive }) => isActive ? `active ${classname}` : classname} data-cartitems={cartitems}>
             <div>
                 {icon}
                 <h5>{title}</h5>

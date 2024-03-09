@@ -16,10 +16,10 @@ export default function Quantity({ quantity, setQuantity }) {
         <div className='quantity-container'>
             <p>Quantity</p>
             <div className='quantity-div'>
-                <span id='minus' onClick={handleMinus}><AiOutlineMinus className='quantity-icon' />
+                <span onClick={handleMinus}><AiOutlineMinus className='quantity-icon' />
                 </span>
                 <p>{quantity}</p>
-                <span id='plus' onClick={handlePlus}><AiOutlinePlus className='quantity-icon' />
+                <span onClick={handlePlus}><AiOutlinePlus className='quantity-icon' />
                 </span>
             </div>
         </div>

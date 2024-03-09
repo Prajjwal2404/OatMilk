@@ -1,0 +1,221 @@
+.subscribe-container {
+    width: 100%;
+    padding-inline: 1.5rem;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.subscribe-back-icon {
+    align-self: start;
+    font-size: 1.25rem;
+    color: #eaeaea;
+    background-color: #000;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.subscribe-back-icon:hover {
+    background-color: #353535;
+}
+
+.subscribe-back-icon:active {
+    transform: scale(0.95);
+}
+
+.subscribe-wrapper {
+    width: min(31rem, 100%);
+    padding-inline: 0.5rem;
+    position: relative;
+    display: flex;
+    gap: 2.5rem;
+    overflow: hidden;
+}
+
+.subscribe-wrapper .add-form {
+    flex-shrink: 0;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    transition: margin-left 0.25s ease;
+}
+
+.subscribe-wrapper.hidden .add-form.new {
+    margin-left: calc(-100% - 2.5rem);
+}
+
+.subscribe-wrapper .add-form.disable {
+    pointer-events: none;
+}
+
+.autofill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.add-form input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.add-form input[type="number"]::-webkit-outer-spin-button,
+.add-form input[type="number"]::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.state-city-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.state-city-div .small {
+    width: calc(50% - 1.5rem);
+}
+
+.add-form .save-add-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    width: 100%;
+    padding: 0 0.5rem;
+}
+
+.add-form .save-add-div label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.add-form .save-add-div input {
+    cursor: pointer;
+    accent-color: #000;
+}
+
+.add-form .save-add-div a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-form .save-add-div a:hover {
+    text-decoration: underline;
+}
+
+.autofill,
+.add-btn {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.autofill:hover,
+.add-btn:hover {
+    background-color: #353535;
+}
+
+.autofill:active,
+.add-btn:active {
+    transform: scale(0.95);
+}
+
+.add-card-container {
+    flex-grow: 1;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1rem;
+    background-color: #fff;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+
+.add-card-container>h2 {
+    margin-block: auto;
+    align-self: center;
+}
+
+.add-card-container label {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #eaeaea;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.add-card-container label:hover {
+    background-color: #dadada;
+}
+
+.add-card-container label:active {
+    transform: scale(0.95);
+}
+
+.add-card-container label input {
+    accent-color: #000;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.add-card-container label h4 {
+    font-size: 1.1rem;
+}
+
+.add-card-container label p {
+    line-height: 150%;
+}
+
+.new-add {
+    align-self: flex-start;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.new-add:hover {
+    text-decoration: underline;
+}

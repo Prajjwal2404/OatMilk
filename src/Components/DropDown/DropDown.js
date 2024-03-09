@@ -16,9 +16,10 @@ export default function DropDown({ items, selected, setSelected, name }) {
     }
 
     useEffect(() => {
+        setSelected(items[0])
         function checkDropDown(event) {
-            if (!ref.current[0].contains(event.target) && !ref.current[1].contains(event.target) &&
-                ref.current[1].classList.contains('open')) openClose()
+            if (!ref.current[0]?.contains(event.target) && !ref.current[1]?.contains(event.target) &&
+                ref.current[1]?.classList.contains('open')) openClose()
         }
         window.addEventListener('click', checkDropDown)
         return () => window.removeEventListener('click', checkDropDown)

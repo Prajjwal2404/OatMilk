@@ -1,0 +1,208 @@
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.wrapper {
+    width: min(21rem, 95dvw);
+    padding-inline: 0.5rem;
+    position: relative;
+    display: flex;
+    gap: 2.5rem;
+    overflow: hidden;
+}
+
+.wrapper .form-box {
+    flex-shrink: 0;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    transition: margin-left 0.25s ease;
+}
+
+.wrapper .register {
+    margin-left: calc(-100% - 2.5rem);
+}
+
+.wrapper.registration .register {
+    margin-left: 0;
+}
+
+.wrapper.reset-pass .register {
+    margin-left: calc(-200% - 5rem);
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.form-box form.disable {
+    pointer-events: none;
+}
+
+.form-box form h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.form-box form h4 {
+    font-size: 0.9rem;
+    text-align: center;
+    color: red;
+}
+
+.form-box form h4.success {
+    color: green;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.25rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-box input[name='regPass'],
+.input-box input[name='logPass'] {
+    padding-right: 2.25rem;
+}
+
+.input-box .icon {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.75rem;
+    font-size: 1.1rem;
+    color: #656565;
+}
+
+.input-box .pass-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.75rem;
+    font-size: 1.1rem;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.input-box:has(input:focus) .pass-icon,
+.input-box .pass-icon:active {
+    opacity: 1;
+}
+
+.input-box:has(input:focus),
+.input-box:has(.pass-icon:active) {
+    outline: 2px solid #000;
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label,
+.terms-of-service {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.remember-forgot label input,
+.terms-of-service input {
+    accent-color: #000;
+    cursor: pointer;
+}
+
+.terms-of-service a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.terms-of-service a:hover {
+    text-decoration: underline;
+}
+
+.remember-forgot a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.auth-btn,
+.google-btn {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.or-login {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.auth-btn:hover,
+.google-btn:hover {
+    background-color: #353535;
+}
+
+.auth-btn:active,
+.google-btn:active {
+    transform: scale(0.95);
+}
+
+.login-register {
+    font-size: 0.95rem;
+    text-align: center;
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: 2.5rem
+}
+
+.login-register p a {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}

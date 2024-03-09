@@ -56,3 +56,66 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.info-div p {
+    line-height: 125%;
+}
+
+@media screen and (max-width: 750px) {
+
+    .product-hero>h1 {
+        text-align: center;
+        font-size: clamp(2.5rem, 12vw - 10px, 4rem);
+    }
+
+    .product-hero,
+    .product-info-container {
+        flex-direction: column;
+    }
+
+    .nushoat-div {
+        --height-value: clamp(20rem, 544px - 48vw, 26rem);
+        height: calc(100svh - var(--height-value));
+    }
+
+    .oatmilk-bottle-div {
+        height: calc(100svh - 20rem);
+    }
+
+    .info-div {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        overflow-x: hidden;
+        gap: 2rem;
+    }
+
+    .info-wrapper {
+        flex-shrink: 0;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .info-wrapper p {
+        line-height: 135%;
+    }
+
+    .wrapper-first {
+        margin-left: calc(var(--margin-value) * 1% + (var(--margin-value) / 100 * 2rem));
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+    .product-hero {
+        padding-top: 0;
+        padding-bottom: clamp(6.13rem, 199.57px - 17.5vw, 8.63rem);
+    }
+
+    .info-div {
+        padding-bottom: 1rem;
+    }
+}

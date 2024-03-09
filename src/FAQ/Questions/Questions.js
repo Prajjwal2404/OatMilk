@@ -18,26 +18,11 @@ export default function Questions() {
     return (
         <div className='questions-container'>
             <div className='questions-tab-container'>
-                <label>
-                    <input type='radio' name='faq' value='oatmilk' checked={selected === 'oatmilk'} onChange={handleChange} />
-                    OATMILK
-                </label>
-                <label>
-                    <input type='radio' name='faq' value='usage' checked={selected === 'usage'} onChange={handleChange} />
-                    USAGE
-                </label>
-                <label>
-                    <input type='radio' name='faq' value='delivery' checked={selected === 'delivery'} onChange={handleChange} />
-                    DELIVERY
-                </label>
-                <label>
-                    <input type='radio' name='faq' value='nutritional' checked={selected === 'nutritional'} onChange={handleChange} />
-                    NUTRITIONAL INFO
-                </label>
-                <label>
-                    <input type='radio' name='faq' value='sustainability' checked={selected === 'sustainability'} onChange={handleChange} />
-                    SUSTAINABILITY
-                </label>
+                <QuestionTabs value='oatmilk' selected={selected} handleChange={handleChange} title='OATMILK' />
+                <QuestionTabs value='usage' selected={selected} handleChange={handleChange} title='USAGE' />
+                <QuestionTabs value='delivery' selected={selected} handleChange={handleChange} title='DELIVERY' />
+                <QuestionTabs value='nutritional' selected={selected} handleChange={handleChange} title='NUTRITIONAL INFO' />
+                <QuestionTabs value='sustainability' selected={selected} handleChange={handleChange} title='SUSTAINABILITY' />
             </div>
             <div className='questions-wrapper'>
                 <AnimatePresence mode='wait'>
@@ -45,6 +30,15 @@ export default function Questions() {
                 </AnimatePresence>
             </div>
         </div>
+    )
+}
+
+function QuestionTabs({ value, selected, handleChange, title }) {
+    return (
+        <label>
+            <input type='radio' name='faq' value={value} checked={selected === value} onChange={handleChange} />
+            {title}
+        </label>
     )
 }
 

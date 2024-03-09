@@ -10,7 +10,16 @@ import Buy from './Buy/Buy'
 import More from './Buy/More/More'
 import Listing from './Listing/Listing'
 import Details from './Details/Details'
+import Subscribe from './Subscribe/Subscribe'
+import Cart from './Components/Cart'
+import Login from './Login/Login'
 import NotFound from './NotFoundPage/NotFoundPage'
+import { loader as ListingLoader } from './Listing/Listing'
+import { loader as DetailsLoader } from './Details/Details'
+import { loader as SubscribeLoader } from './Subscribe/Subscribe'
+import { action as LoginAction } from './Login/Login'
+import { action as SubscribeAction } from './Subscribe/Subscribe'
+import RequireAuth from './Utils/HandleUser'
 
 export default function App() {
 
@@ -22,15 +31,17 @@ export default function App() {
       <Route path='environment' element={<Environment />} />
       <Route path='faq' element={<FAQ />} />
       <Route path='buy' element={<Buy />}>
-        <Route index element={<Listing />} />
-        <Route path='details/:id' element={<Details />} />
+        <Route index element={<Listing />} loader={ListingLoader} />
+        <Route path='details/:id' element={<Details />} loader={DetailsLoader} />
+        <Route path='details/:id/subscribe' element={<Subscribe />} loader={SubscribeLoader} action={SubscribeAction} />
         <Route path='subscriptions' element={<div style={{ width: '100%', height: '100%' }} />} />
-        <Route path='cart' element={<div style={{ width: '100%', height: '100%' }} />} />
-        <Route path='account' element={<More />}>
+        <Route path='cart' element={<Cart />} />
+        <Route path='account' element={<More />} loader={async ({ request }) => await RequireAuth(request)}>
           <Route index element={<div style={{ width: '100%', height: '100%' }} />} />
           <Route path='orders' element={<div style={{ width: '100%', height: '100%' }} />} />
           <Route path='addresses' element={<div style={{ width: '100%', height: '100%' }} />} />
         </Route>
+        <Route path='login' element={<Login />} action={LoginAction} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </Route>
