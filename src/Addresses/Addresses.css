@@ -1,0 +1,177 @@
+.adds-card-container {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    justify-content: space-evenly;
+    justify-items: center;
+    gap: 1.5rem;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.adds-card-container h1 {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-bottom: 1rem;
+}
+
+.adds-card-container:has(h2) {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+}
+
+.add-new {
+    width: min(100%, 30rem);
+    min-height: 6rem;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid #dadada;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.25rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.adds-card-div {
+    width: min(100%, 30rem);
+    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid #dadada;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.add-new:hover,
+.adds-card-div:hover {
+    background-color: #dadada;
+}
+
+.add-new:active,
+.adds-card-div:active {
+    transform: scale(0.95);
+}
+
+.adds-card-div h4 {
+    font-size: 1.1rem;
+}
+
+.adds-card-div p {
+    line-height: 150%;
+}
+
+.adds-form-container {
+    width: min(30rem, 95dvw);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    background-color: #ededed;
+    box-shadow: 0 0 30px #959595;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    scale: 0;
+    transition: scale 0.25s ease;
+}
+
+.adds-form-container.show {
+    scale: 1;
+}
+
+.adds-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3.25rem;
+    width: 3.25rem;
+    background-color: #000;
+    font-size: 2rem;
+    color: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    z-index: 1;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease;
+}
+
+.adds-close:hover {
+    box-shadow: -1px 1px 10px #000;
+}
+
+.autofill.adds {
+    width: calc(100% - 3.25rem);
+}
+
+.dialog-wrapper .add-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1.5rem;
+}
+
+.dialog-wrapper .add-form.disable {
+    pointer-events: none;
+}
+
+.add-form input[name='idx'] {
+    display: none;
+}
+
+.delete-update-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-update-div .small {
+    width: calc(50% - clamp(1rem, 17.5vw - 49px, 1.5rem));
+}
+
+.delete-update-div .delete {
+    background-color: crimson;
+}
+
+.delete-update-div .delete:hover {
+    background-color: red;
+}
+
+@media (pointer: coarse) {
+
+    .add-new:hover,
+    .adds-card-div:hover {
+        background-color: #fff;
+    }
+
+    .add-new:active,
+    .adds-card-div:active {
+        background-color: #dadada;
+        transform: scale(0.95);
+    }
+
+    .adds-close:hover {
+        box-shadow: none;
+    }
+
+    .adds-close:active {
+        box-shadow: -1px 1px 10px #000;
+    }
+
+    .delete-update-div .delete:hover {
+        background-color: crimson;
+    }
+
+    .delete-update-div .delete:active {
+        background-color: red;
+        transform: scale(0.95);
+    }
+}

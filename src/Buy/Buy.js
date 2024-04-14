@@ -1,5 +1,8 @@
-import React, { useRef } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { NavLink, Outlet, defer, useLoaderData, useRevalidator } from 'react-router-dom'
+import { auth, queryClient, user } from '../Db/FirebaseConfig'
+import { onAuthStateChanged } from 'firebase/auth'
+import { CurrentUser } from '../Utils/HandleUser'
 import { IoChevronForward, IoMenu, IoCalendar } from 'react-icons/io5'
 import { RiShoppingBag3Fill } from "react-icons/ri"
 import { IoMdCart } from "react-icons/io"
@@ -9,18 +12,57 @@ import useMedia from '../Utils/Media'
 import Footer from '../Footer/Footer'
 import './Buy.css'
 
+export async function loader() {
+    return defer({
+        userCart: queryClient.fetchQuery({
+            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
+            staleTime: Infinity, gcTime: Infinity
+        }).then(res => {
+            if (res) return queryClient.fetchQuery({
+                queryKey: ['userData'], queryFn: () => user(res.uid),
+                staleTime: Infinity, gcTime: Infinity
+            })
+            else return res
+        })
+    })
+}
+
 export default function Buy() {
 
-    const isMobile = useMedia('screen and (max-width: 650px)')
-
+    const { userCart } = useLoaderData()
+    const revalidator = useRevalidator()
+    const [cartItems, setCartItems] = useState('')
     const ref = useRef()
+
+    useEffect(() => {
+        let isMounted = false
+        const unsubscribe = onAuthStateChanged(auth, () => {
+            if (isMounted) revalidator.revalidate()
+            else isMounted = true
+        })
+        return () => unsubscribe()
+    }, [])
+
+    useEffect(() => {
+        userCart.then(res => {
+            let cartQuantity = 0
+            if (res) {
+                res?.cart?.forEach(({ quantity }) => cartQuantity += quantity)
+                setCartItems(cartQuantity)
+            }
+            else setCartItems('')
+        })
+    }, [userCart])
+
+    const isMobile = useMedia('screen and (max-width: 650px)')
 
     return (
         <div className='buy-container'>
             <nav className="buy-nav" ref={ref}>
                 <NavItems title='Products' path='/buy' end={true} icon={<RiShoppingBag3Fill className='item-icon' />} />
                 <NavItems title='Subscriptions' path='subscriptions' icon={<IoCalendar className='item-icon' />} />
-                <NavItems title='Cart' path='cart' icon={<IoMdCart className='item-icon' />} classname='cart' cartitems={0} />
+                <NavItems title='Cart' path='cart' icon={<IoMdCart className='item-icon' />} classname='cart'
+                    cartitems={cartItems} />
                 {isMobile ? <NavItems title='More' path='account' icon={<IoMenu className='item-icon' />} /> :
                     <div className='account-div'>
                         <NavItems title='Addresses' path='account/addresses' icon={<PiAddressBookFill className='item-icon' />} classname='addresses' />
@@ -30,7 +72,7 @@ export default function Buy() {
             </nav>
             <div className='buy-outlet'>
                 <div className='outlet-wrapper'>
-                    <Outlet context={{ ref }} />
+                    <Outlet context={{ ref, cartItems }} />
                 </div>
                 <Footer />
             </div>

@@ -9,25 +9,37 @@
     padding-inline: 1.5rem;
 }
 
-.notfound-div h1 {
+.notfound-div h1,
+.error-div pre {
     text-align: center;
 }
 
-.notfound-div a {
+.error-div h1,
+.error-div pre {
+    color: red;
+}
+
+.notfound-div a,
+.error-div button {
     padding: 1rem 2rem;
     background-color: #000;
     border-radius: 10px;
+    border: none;
     color: #eaeaea;
+    font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
+    cursor: pointer;
     transition: transform 0.25s ease, background-color 0.25s ease;
 }
 
-.notfound-div a:hover {
+.notfound-div a:hover,
+.error-div button:hover {
     background-color: #353535;
 }
 
-.notfound-div a:active {
+.notfound-div a:active,
+.error-div button:active {
     transform: scale(0.95);
 }
 
@@ -44,11 +56,14 @@
 }
 
 @media (pointer: coarse) {
-    .notfound-div a:hover {
+
+    .notfound-div a:hover,
+    .error-div button:hover {
         background-color: #000;
     }
 
-    .notfound-div a:active {
+    .notfound-div a:active,
+    .error-div button:active {
         background-color: #353535;
     }
 }

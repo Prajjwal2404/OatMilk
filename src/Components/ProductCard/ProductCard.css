@@ -72,6 +72,23 @@
     font-size: 0.8rem;
 }
 
+.product-card-subscription {
+    position: absolute;
+    padding: 0.25rem 1rem;
+    left: -1rem;
+    top: 0.25rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    background-color: #000;
+    color: #eaeaea;
+}
+
+.product-card-subscription:empty {
+    display: none;
+}
+
 @media (pointer: coarse) {
     .product-card:hover {
         box-shadow: none;

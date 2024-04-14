@@ -8,6 +8,7 @@
     overflow: hidden;
     margin-top: 5rem;
     margin-bottom: 5rem;
+    padding-bottom: 1rem;
 }
 
 .processes-div {
@@ -35,6 +36,7 @@
 .process-about-div p {
     font-size: 0.9rem;
     font-weight: 500;
+    line-height: 150%;
 }
 
 .process-img-div {
@@ -150,6 +152,7 @@
 .final-product {
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 10rem;
@@ -166,13 +169,18 @@
     }
 
     .process-about-div {
-        width: 18rem;
+        width: 20rem;
         height: 8.125rem;
     }
 
-    .process-about-div h1,
+    .process-about-div h1 {
+        text-align: center;
+    }
+
     .process-about-div p {
         text-align: center;
+        font-size: 1rem;
+        line-height: 140%;
     }
 
     .process-img-div {

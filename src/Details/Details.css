@@ -2,16 +2,16 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    align-items: end;
+    align-items: start;
     gap: 2rem;
     padding-inline: 2rem;
     position: relative;
-    align-self: flex-start;
+    margin-bottom: 3rem;
 }
 
 .buy-back-icon {
-    position: absolute;
-    top: 1rem;
+    position: fixed;
+    top: 6.15rem;
     left: 2rem;
     z-index: 98;
     font-size: 1.25rem;
@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    padding-top: 3rem;
 }
 
 .details-content-container>h1 {
@@ -67,8 +68,21 @@
     font-size: 0.95rem;
 }
 
-.details-content-container>h2 span {
+.price-wt {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding-right: 1.5rem;
+}
+
+.price-wt h2 span {
     font-size: 0.95rem;
+}
+
+.price-wt h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 2px;
 }
 
 .details-content-container>p {
@@ -82,6 +96,10 @@
     gap: 4rem;
 }
 
+.size-container {
+    width: fit-content;
+}
+
 .size-container p {
     text-align: center;
     font-size: 0.9rem;
@@ -92,7 +110,7 @@
 .subscribe-div {
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     position: relative;
 }
 
@@ -137,6 +155,24 @@
     position: relative;
 }
 
+.manage-sub {
+    width: 7rem;
+    aspect-ratio: 63 / 16;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #000;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.manage-sub:hover {
+    background-color: rgba(215, 215, 215, 0.5);
+}
+
 .frequency-div>p {
     position: absolute;
     bottom: 125%;
@@ -166,7 +202,17 @@
     transform: scale(1);
 }
 
-.details-content-container>button {
+.add-to-cart-form {
+    width: 100%;
+}
+
+.add-to-cart-form input {
+    display: none;
+}
+
+.details-content-container>button,
+.add-to-cart-form button,
+.login-options-container button {
     padding-block: 1rem;
     width: 100%;
     font-size: 1rem;
@@ -178,17 +224,85 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
     cursor: pointer;
     transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
-.details-content-container>button:hover {
+.details-content-container>button:hover,
+.add-to-cart-form button:hover,
+.login-options-container button:hover,
+.login-options-close:hover {
     background-color: #353535;
 }
 
-.details-content-container>button:active {
+.details-content-container>button:active,
+.add-to-cart-form button:active,
+.login-options-container button:active,
+.login-options-close:active {
     transform: scale(0.95);
+}
+
+.login-options-container {
+    width: min(22rem, 95vw - 6rem);
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    scale: 0;
+    position: relative;
+    transition: scale 0.25s ease;
+}
+
+.login-options-container.show {
+    scale: 1;
+}
+
+.login-options-close {
+    position: absolute;
+    top: 1rem;
+    right: -3rem;
+    font-size: 1.25rem;
+    height: 2rem;
+    width: 2rem;
+    background-color: #000;
+    border-radius: 50%;
+    color: #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.login-options-container p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.login-options-container button {
+    margin-top: 0;
+}
+
+.login-options-container form {
+    width: 100%;
+}
+
+.login-options-container form input {
+    display: none;
+}
+
+.details-content-container>h2:last-of-type {
+    margin-top: 0.5rem;
+}
+
+.reviews-wrapper {
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #000;
 }
 
 @media (pointer: coarse) {
@@ -201,11 +315,25 @@
         transform: scale(0.95);
     }
 
-    .details-content-container>button:hover {
+    .manage-sub:hover {
+        background-color: transparent;
+    }
+
+    .manage-sub:active {
+        background-color: rgba(215, 215, 215, 0.5);
+    }
+
+    .details-content-container>button:hover,
+    .add-to-cart-form button:hover,
+    .login-options-container button:hover,
+    .login-options-close:hover {
         background-color: #000;
     }
 
-    .details-content-container>button:active {
+    .details-content-container>button:active,
+    .add-to-cart-form button:active,
+    .login-options-container button:active,
+    .login-options-close:active {
         background-color: #353535;
         transform: scale(0.95);
     }
@@ -216,7 +344,11 @@
         flex-direction: column;
         align-items: center;
         gap: 3rem;
-        margin-bottom: 3rem;
+    }
+
+    .buy-back-icon {
+        position: absolute;
+        top: 1rem;
     }
 
     .details-content-container {

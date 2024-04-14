@@ -37,6 +37,7 @@ export default function Nav() {
                         {switcher ? <IoClose className='menu-icon' /> : <IoMenu className='menu-icon' />}</span>}
                     <div className="pages" ref={el => ref.current[1] = el}>
                         <NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+                        <NavLink to='about' className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink>
                         <NavLink to='product' className={({ isActive }) => isActive ? 'active' : ''}>Product</NavLink>
                         <NavLink to='process' className={({ isActive }) => isActive ? 'active' : ''}>Process</NavLink>
                         <NavLink to='environment' className={({ isActive }) => isActive ? 'env-active' : ''}>Environment</NavLink>
@@ -45,7 +46,9 @@ export default function Nav() {
                     <NavLink to='buy' className={({ isActive }) => isActive ? 'active buy-btn' : 'buy-btn'}>Buy</NavLink>
                 </nav>
             </div>
-            <ScrollRestoration getKey={location => { return location.pathname }} />
+            <ScrollRestoration getKey={location => {
+                return location.pathname.includes('/buy/account/orders') ? location.key : location.pathname
+            }} />
             <Outlet />
             {!pathname.includes('/buy') && <Footer />}
         </>

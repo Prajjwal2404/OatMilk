@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore/lite"
 import { getAuth } from "firebase/auth"
+import { QueryClient } from '@tanstack/react-query'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -28,7 +29,7 @@ export async function data() {
 export async function product(id) {
     const productDocRef = doc(db, 'Products', id)
     const productSnapshot = await getDoc(productDocRef)
-    return { ...productSnapshot.data(), id: productSnapshot.id }
+    return productSnapshot.exists() ? { ...productSnapshot.data(), id: productSnapshot.id } : null
 }
 
 export async function user(id) {
@@ -36,3 +37,5 @@ export async function user(id) {
     const userSnapshot = await getDoc(userDocRef)
     return { ...userSnapshot.data(), id: userSnapshot.id }
 }
+
+export const queryClient = new QueryClient()

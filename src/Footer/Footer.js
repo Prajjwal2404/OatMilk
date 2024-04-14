@@ -12,9 +12,12 @@ export default function Footer() {
                 <div className='contact'>
                     <h4>Contact Us</h4>
                     <div className='socials-div'>
-                        <a href='#' aria-label='facebook'><IoLogoFacebook /></a>
-                        <a href='https://www.instagram.com/oatsbynush' target='_blank' aria-label='instagram'><IoLogoInstagram /></a>
-                        <a className='portfolio' href='https://www.prajjwalpratapshah.in' target='_blank' aria-label='portfolio'>
+                        <a href='https://www.facebook.com/profile.php?id=61558287860284&mibextid=LQQJ4d' target='_blank'
+                            aria-label='facebook'><IoLogoFacebook /></a>
+                        <a href='https://www.instagram.com/oatsbynush' target='_blank'
+                            aria-label='instagram'><IoLogoInstagram /></a>
+                        <a className='portfolio' href='https://www.prajjwalpratapshah.in' target='_blank'
+                            aria-label='portfolio'>
                             <img src={Portfolio} alt='portfolio' />
                             <h6>Developer</h6>
                         </a>
@@ -23,10 +26,10 @@ export default function Footer() {
                 </div>
                 <div className='legal-stuff'>
                     <div className='legal-links'>
-                        <Link to='#'>Terms of Service</Link>
-                        <Link to='#'>Privacy Policy</Link>
-                        <Link to='#'>Shipping Policy</Link>
-                        <Link to='#'>Return and Refund Policy</Link>
+                        <Link to='/terms'>Terms of Service</Link>
+                        <Link to='/privacy'>Privacy Policy</Link>
+                        <Link to='/shipping'>Shipping Policy</Link>
+                        <Link to='/returnrefund'>Return and Refund Policy</Link>
                     </div>
                     <h5>Copyright © Nush Oats Pvt. Ltd., All Rights Reserved</h5>
                 </div>

@@ -1,0 +1,151 @@
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.reviews-container>p {
+    text-align: center;
+    font-weight: 500;
+}
+
+.reviews-div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    overflow: hidden;
+}
+
+.review-star {
+    font-size: 0.95rem;
+}
+
+.reviews-div p {
+    margin-bottom: 0.1rem;
+    font-weight: 500;
+}
+
+.reviews-div hr {
+    border-top: none;
+}
+
+.pagination-container {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap: 0.5rem;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+}
+
+.pagination-container::-webkit-scrollbar {
+    display: none;
+}
+
+.pagination-container label {
+    flex-shrink: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    scroll-snap-align: start;
+}
+
+.pagination-container label:has(input:checked) {
+    background-color: #000;
+    color: #eaeaea;
+}
+
+.pagination-container label:first-child {
+    margin-left: auto;
+}
+
+.pagination-container label:last-child {
+    margin-right: auto;
+}
+
+.pagination-container label input {
+    display: none;
+}
+
+.review-submit.disable {
+    pointer-events: none;
+}
+
+.review-submit .rating-container-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+
+.rating-container-div .rating-container {
+    display: flex;
+}
+
+.rating-container label {
+    font-size: 1.3rem;
+}
+
+.rating-container label input {
+    height: 1px;
+    width: 1px;
+    opacity: 0;
+}
+
+.star-rate {
+    cursor: pointer;
+}
+
+.rating-container-div button {
+    margin-right: 0.25rem;
+    padding: 0.3rem 1rem;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: #000;
+    color: #eaeaea;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.rating-container-div button:hover {
+    background-color: #353535;
+}
+
+.rating-container-div button:active {
+    transform: scale(0.95);
+}
+
+.review-submit>input {
+    display: none;
+}
+
+.review-submit>textarea {
+    font-size: 1rem;
+    resize: vertical;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    padding: 0.5rem;
+}
+
+@media (pointer: coarse) {
+    .rating-container-div button:hover {
+        background-color: #000;
+    }
+
+    .rating-container-div button:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+}

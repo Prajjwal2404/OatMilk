@@ -1,0 +1,39 @@
+.policies-container {
+    min-height: calc(100svh - 5.15rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    margin-top: 5.15rem;
+}
+
+.policies-container h1 {
+    text-align: center;
+}
+
+.policies-points-container {
+    width: min(100%, 60rem);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.25rem;
+}
+
+.policies-points-container h3 {
+    font-weight: 500;
+    text-align: center;
+    align-self: center;
+}
+
+.policies-points-container ul {
+    padding-left: 1.5rem;
+}
+
+@media screen and (max-width: 650px) {
+    .policies-container {
+        margin-top: 0;
+        min-height: calc(100svh - 6.13rem);
+        padding-top: 0;
+    }
+}

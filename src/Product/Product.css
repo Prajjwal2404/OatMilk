@@ -25,14 +25,14 @@
 }
 
 .nushoat-div>img {
-    width: 102%;
-    margin-left: -2px;
+    width: 104%;
+    margin-left: -4px;
 }
 
 .label-div {
     position: absolute;
     left: 0;
-    bottom: 2.5%;
+    bottom: 13%;
     width: 100%;
     mix-blend-mode: multiply;
 }
@@ -57,8 +57,35 @@
     gap: 1rem;
 }
 
+.info-div.last {
+    margin-bottom: 2.5rem;
+}
+
+.nutrition-div {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+}
+
+.nutrition-div svg {
+    height: 4rem;
+}
+
 .info-div p {
     line-height: 125%;
+}
+
+.info-div .free-div {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.info-div .free-div svg {
+    width: 5rem;
+    height: 5rem;
 }
 
 @media screen and (max-width: 750px) {
@@ -90,6 +117,15 @@
         gap: 2rem;
     }
 
+    .nutrition-div {
+        justify-content: center;
+    }
+
+    .nutrition-div svg {
+        height: 3.5rem;
+        margin-top: 0.5rem;
+    }
+
     .info-wrapper {
         flex-shrink: 0;
         width: 100%;
@@ -101,6 +137,19 @@
 
     .info-wrapper p {
         line-height: 135%;
+    }
+
+    .info-wrapper .free-div {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .info-wrapper .free-div svg {
+        width: 4rem;
+        height: 4rem;
     }
 
     .wrapper-first {

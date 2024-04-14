@@ -126,6 +126,14 @@
     .socials-div a.portfolio:active {
         background-color: #27274d;
     }
+
+    .footer-container a:hover {
+        text-decoration: none;
+    }
+
+    .footer-container a:active {
+        text-decoration: underline;
+    }
 }
 
 @container (max-width: 750px) {

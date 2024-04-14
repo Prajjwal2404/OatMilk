@@ -1,0 +1,210 @@
+.subscription-dialog {
+    width: min(35rem, 95vw);
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+    overflow: hidden;
+    scale: 0;
+    transition: scale 0.25s ease;
+}
+
+.subscription-dialog.show {
+    scale: 1;
+}
+
+.dialog-close-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3.25rem;
+    width: 3.25rem;
+    background-color: #000;
+    font-size: 2rem;
+    color: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    z-index: 1;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease;
+}
+
+.dialog-close-icon:hover {
+    box-shadow: -1px 1px 10px #000
+}
+
+.manage-subscription {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+}
+
+.manage-subscription>p {
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.manage-subscription>p span {
+    font-weight: 600;
+}
+
+.manage-subscription>p:nth-of-type(4) {
+    text-transform: capitalize;
+}
+
+.address-used {
+    background-color: #eaeaea;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+
+.address-used::after {
+    content: '';
+    background-color: #eaeaea;
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    height: 0.5rem;
+    width: 100%;
+}
+
+.sub-add-div {
+    grid-column: span 2;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    padding: 0 1rem 0.5rem 1rem;
+    border-top-left-radius: 0;
+}
+
+.sub-add-div h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.sub-add-div p {
+    line-height: 150%;
+    font-size: 0.95rem;
+}
+
+.subscription-dialog button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background-color: crimson;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.subscription-dialog a {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 10px;
+    background-color: #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.no-sub {
+    align-self: center;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.no-sub a {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 10px;
+    background-color: #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.subscription-dialog a:hover,
+.no-sub a:hover {
+    background-color: #353535;
+}
+
+.subscription-dialog button:hover {
+    background-color: red;
+}
+
+.subscription-dialog button:active,
+.subscription-dialog a:active,
+.no-sub a:active {
+    transform: scale(0.95);
+}
+
+@media (pointer: coarse) {
+
+    .dialog-close-icon:hover {
+        box-shadow: none;
+    }
+
+    .dialog-close-icon:active {
+        box-shadow: -1px 1px 10px #000
+    }
+
+    .subscription-dialog button:hover {
+        background-color: crimson;
+    }
+
+    .subscription-dialog button:active {
+        background-color: red;
+        transform: scale(0.95);
+    }
+
+    .subscription-dialog a:hover,
+    .no-sub a:hover {
+        background-color: #000;
+    }
+
+    .subscription-dialog a:active,
+    .no-sub a:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .subscription-dialog {
+        padding-inline: clamp(1rem, 7vw - 14px, 1.5rem);
+    }
+
+    .address-used {
+        grid-row: 6 / 7;
+    }
+
+    .sub-add-div {
+        grid-column: span 1;
+        border-top-right-radius: 0;
+    }
+}

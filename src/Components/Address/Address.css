@@ -1,42 +1,7 @@
-.subscribe-container {
-    width: 100%;
-    padding-inline: 1.5rem;
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.subscribe-back-icon {
-    align-self: start;
-    font-size: 1.25rem;
-    color: #eaeaea;
-    background-color: #000;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.25s ease, transform 0.25s ease;
-}
-
-.subscribe-back-icon:hover {
-    background-color: #353535;
-}
-
-.subscribe-back-icon:active {
-    transform: scale(0.95);
-}
-
 .subscribe-wrapper {
     width: min(31rem, 100%);
+    height: 100%;
     padding-inline: 0.5rem;
-    position: relative;
     display: flex;
     gap: 2.5rem;
     overflow: hidden;
@@ -44,17 +9,16 @@
 
 .subscribe-wrapper .add-form {
     flex-shrink: 0;
-    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
     transition: margin-left 0.25s ease;
 }
 
-.subscribe-wrapper.hidden .add-form.new {
+.subscribe-wrapper.hidden .add-form.first {
     margin-left: calc(-100% - 2.5rem);
 }
 
@@ -69,13 +33,14 @@
     gap: 0.5rem;
 }
 
-.add-form input {
+.add-form input,
+.add-form textarea {
     width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 10px;
     border: none;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .add-form input[type="number"]::-webkit-outer-spin-button,
@@ -84,14 +49,51 @@
     margin: 0;
 }
 
+.add-form input[type="number"] {
+    appearance: textfield;
+}
+
+.add-form textarea {
+    flex-grow: 1;
+    resize: none;
+}
+
 .state-city-div {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
+.state-city-div input[name="district"] {
+    display: none;
+}
+
 .state-city-div .small {
-    width: calc(50% - 1.5rem);
+    width: calc(50% - clamp(1rem, 17.5vw - 49px, 1.5rem));
+}
+
+.state-city-div .dropdown-container.small .dropdown-btn {
+    width: 100%;
+    aspect-ratio: unset;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    justify-content: space-between;
+    background-color: #fff;
+    transition: background-color 0.25s ease;
+}
+
+.state-city-div .dropdown-container.small .dropdown-btn:hover {
+    background-color: rgba(215, 215, 215, 0.5);
+}
+
+.state-city-div .dropdown-container.small .dropdown {
+    top: unset;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0.25rem;
 }
 
 .add-form .save-add-div {
@@ -108,7 +110,6 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: 500;
-    font-size: 0.95rem;
     cursor: pointer;
 }
 
@@ -122,10 +123,6 @@
     text-decoration: none;
     font-weight: 600;
     cursor: pointer;
-}
-
-.add-form .save-add-div a:hover {
-    text-decoration: underline;
 }
 
 .autofill,
@@ -154,6 +151,7 @@
 
 .add-card-container {
     flex-grow: 1;
+    height: 24rem;
     width: 100%;
     padding: 0.5rem;
     display: flex;
@@ -216,6 +214,48 @@
     margin-left: 0.5rem;
 }
 
+.add-form .save-add-div a:hover,
 .new-add:hover {
     text-decoration: underline;
+}
+
+@media (pointer: coarse) {
+
+    .autofill:hover,
+    .add-btn:hover {
+        background-color: #000;
+    }
+
+    .autofill:active,
+    .add-btn:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+
+    .state-city-div .dropdown-container.small .dropdown-btn:hover {
+        background-color: #fff;
+    }
+
+    .state-city-div .dropdown-container.small .dropdown-btn:active {
+        background-color: rgba(215, 215, 215, 0.5);
+    }
+
+    .add-form .save-add-div a:hover,
+    .new-add:hover {
+        text-decoration: none;
+    }
+
+    .add-form .save-add-div a:active,
+    .new-add:active {
+        text-decoration: underline;
+    }
+
+    .add-card-container label:hover {
+        background-color: #eaeaea;
+    }
+
+    .add-card-container label:active {
+        background-color: #dadada;
+        transform: scale(0.95);
+    }
 }

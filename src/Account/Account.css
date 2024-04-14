@@ -1,0 +1,231 @@
+.user-info-container {
+    width: 100%;
+    padding: 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+}
+
+.user-info-container .user-info-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+}
+
+.user-info-container .user-info-div.disable {
+    pointer-events: none;
+}
+
+.user-info-div h3 {
+    font-size: 1.25rem;
+}
+
+.user-info-div p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    outline: none;
+    white-space: nowrap;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.user-info-div p::-webkit-scrollbar {
+    display: none;
+}
+
+.user-input-div {
+    height: 2.25rem;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    position: relative;
+}
+
+.user-input-div:has(p.edit) {
+    max-width: 95%;
+    background-color: #fff;
+    outline: 2px solid #000;
+}
+
+.user-input-div input {
+    display: none;
+}
+
+.user-edit-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.user-input-div button {
+    height: 100%;
+    padding-inline: 0.75rem;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #000;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #eaeaea;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+
+.edit-close-icon {
+    font-size: 1.75rem;
+    position: absolute;
+    top: 50%;
+    right: -2.25rem;
+    translate: 0 -50%;
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.user-edit-icon:hover,
+.edit-close-icon:hover {
+    color: #353535;
+}
+
+.user-info-container>button,
+.log-sign-container button {
+    width: 12rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.user-info-container button:hover {
+    background-color: #353535;
+}
+
+.user-edit-icon:active,
+.edit-close-icon:active,
+.user-info-container>button:active,
+.log-sign-container button:active {
+    transform: scale(0.95);
+}
+
+.log-sign-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.log-sign-container>button {
+    width: min(12rem, 50%);
+}
+
+.log-sign-container .divider {
+    height: 2.75rem;
+    border-left: 2px dashed #000;
+}
+
+.log-sign-container .sign-up-div {
+    width: 14.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+}
+
+.log-sign-container .sign-up-div button {
+    width: auto;
+    flex-grow: 1;
+}
+
+.log-sign-info-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.log-sign-info-icon:hover+p {
+    transform: scale(1);
+}
+
+.log-sign-container p {
+    position: absolute;
+    bottom: 80%;
+    right: 0;
+    z-index: 1;
+    background: #ededed;
+    border-radius: 6.5px;
+    box-shadow: 0 0 30px #c0c0c0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 150%;
+    white-space: nowrap;
+    padding: 0.35rem 0.65rem;
+    transform-origin: bottom right;
+    transform: scale(0);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 650px) {
+
+    .user-info-container,
+    .order-history-wrapper,
+    .adds-card-container {
+        padding: 2rem 2rem !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .log-sign-container {
+        flex-direction: column-reverse;
+        align-items: start;
+    }
+
+    .log-sign-container>button {
+        width: 12rem;
+    }
+
+    .log-sign-container .divider {
+        height: 0;
+        width: 12rem;
+        border-left: none;
+        border-top: 2px dashed #000;
+    }
+}
+
+@media (pointer: coarse) {
+
+    .user-edit-icon:hover,
+    .edit-close-icon:hover {
+        color: #000;
+    }
+
+    .user-edit-icon:active,
+    .edit-close-icon:active {
+        color: #353535;
+        transform: scale(0.95);
+    }
+
+    .user-info-container button:hover {
+        background-color: #000;
+    }
+
+    .user-info-container>button:active,
+    .log-sign-container button:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+
+    .user-input-div button:active {
+        background-color: #353535;
+    }
+}

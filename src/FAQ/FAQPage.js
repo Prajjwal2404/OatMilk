@@ -1,7 +1,7 @@
 import React from 'react'
 import FAQHero from './FAQHero/FAQHero'
 import Questions from './Questions/Questions'
-import Message from '../Message/Message'
+import Message from '../Components/Message/Message'
 import Mountains from '../Illustrations/Mountains'
 
 export default function FAQ() {

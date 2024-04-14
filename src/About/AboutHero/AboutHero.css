@@ -1,0 +1,27 @@
+.about-hero {
+    width: 100%;
+    height: var(--hero-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10rem;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.about-hero-div {
+    width: clamp(21rem, 62vw, 25rem);
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.35));
+    position: relative;
+    z-index: -1;
+}
+
+.about-hero-logo {
+    width: 100%;
+}
+
+.about-hero-welcome {
+    height: 10%;
+    width: 46.30%;
+    position: absolute;
+}

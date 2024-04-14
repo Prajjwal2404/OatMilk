@@ -1,3 +1,15 @@
+.intro-title-div {
+    width: min(60rem, 100% - 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    line-height: 140%;
+    margin-inline: auto;
+    margin-top: 5rem;
+}
+
 .intro-container {
     width: 100%;
     display: flex;
@@ -6,7 +18,7 @@
     justify-content: center;
     gap: 20rem;
     overflow: hidden;
-    margin-top: 5rem;
+    margin-top: 10rem;
     margin-bottom: 5rem;
 }
 
@@ -30,11 +42,23 @@
 .about-div h1 {
     width: 100%;
     text-align: start;
+    white-space: nowrap;
+}
+
+.about-div h1 span {
+    display: inline-flex;
+    max-width: 1.5rem;
+}
+
+.about-div h1 span svg {
+    min-width: 2.5rem;
+    transform: translate(-0.5rem, 1rem);
 }
 
 .about-div p {
     font-size: 0.9rem;
     font-weight: 500;
+    line-height: 150%;
 }
 
 .oat-div,
@@ -49,18 +73,33 @@
 }
 
 @media screen and (max-width: 650px) {
+
+    .intro-container {
+        margin-top: 5rem;
+    }
+
     .intros-div {
         flex-direction: column;
     }
 
     .about-div {
-        width: 18rem;
-        height: 21.8rem;
+        width: 22rem;
+        height: 25rem;
     }
 
-    .about-div h1,
+    .about-div h1 {
+        text-align: center;
+    }
+
     .about-div p {
         text-align: center;
+        font-size: 1rem;
+        line-height: 140%;
+    }
+
+    .intros-div:last-child .about-div h1 {
+        width: 18rem;
+        white-space: initial;
     }
 
     .oat-div,

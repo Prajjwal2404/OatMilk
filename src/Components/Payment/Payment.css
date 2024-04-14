@@ -1,0 +1,183 @@
+.payment-container {
+    height: 100%;
+    width: min(31rem, 100%);
+    padding-inline: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.payment-method-container {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.payment-method-container:has(.no-price-found) {
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-method-container input[type='number'] {
+    display: none;
+}
+
+.payment-method-container label {
+    width: 100%;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.payment-method-container label:hover {
+    background-color: #dadada;
+}
+
+.payment-method-container label:active {
+    transform: scale(0.95);
+}
+
+.payment-method-container label input {
+    accent-color: #000;
+    height: 1.1rem;
+    width: 1.1rem;
+    cursor: pointer;
+}
+
+.payment-method-container label img {
+    height: 1.5rem;
+}
+
+.cash-icon {
+    color: green;
+    font-size: 1.5rem;
+}
+
+.qr-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.payment-method-container label:has(input:checked)+.qr-container {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.qr-container img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.total-price-div {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.price-info-icon {
+    margin-top: 1px;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.qr-container .remarks {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: red;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.order-id-div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qr-container .order-id-div .orderid {
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    background-color: #000;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.order-id-div .orderid::after {
+    content: 'Copied';
+    position: absolute;
+    left: -4.5rem;
+    top: 0;
+    padding: 0.15rem 0.5rem;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.65);
+    pointer-events: none;
+    transform-origin: right center;
+    transform: scale(0);
+    transition: transform 0.25s ease;
+}
+
+.order-id-div .orderid.copied::after {
+    transform: scale(1);
+}
+
+.copy-icon {
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.price-info-icon:hover,
+.copy-icon:hover {
+    transform: scale(1.1);
+}
+
+.price-info-icon:active,
+.copy-icon:active {
+    transform: scale(0.95);
+}
+
+@media (pointer: coarse) {
+    .payment-method-container label:hover {
+        background-color: #eaeaea;
+    }
+
+    .payment-method-container label:active {
+        background-color: #dadada;
+        transform: scale(0.95);
+    }
+
+    .price-info-icon:hover,
+    .copy-icon:hover {
+        transform: scale(1);
+    }
+
+    .price-info-icon:active,
+    .copy-icon:active {
+        transform: scale(0.95);
+    }
+}

@@ -1,0 +1,220 @@
+.order-details-wrapper {
+    width: min(30rem, 50% - 0.75rem);
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    position: relative;
+}
+
+.order-details-container {
+    max-height: calc(100svh - 7.15rem);
+    width: 100%;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    position: sticky;
+    top: 6.15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 1.5rem;
+    overflow-y: scroll;
+}
+
+.order-details-container.mob,
+.order-details-container:has(.no-order-found) {
+    height: calc(100svh - 11.15rem);
+    justify-content: center;
+}
+
+.orders-back-icon {
+    position: absolute;
+    left: 0;
+    top: -3.7rem;
+    font-size: 1.25rem;
+    color: #eaeaea;
+    background-color: #000;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.orders-back-icon:hover {
+    background-color: #353535;
+}
+
+.orders-back-icon:active {
+    transform: scale(0.95);
+}
+
+.order-status-container {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    padding-top: 1.5rem;
+}
+
+.order-status-container hr {
+    flex-grow: 1;
+}
+
+.order-status-div {
+    height: 1.25rem;
+    width: 1.25rem;
+    padding: 0.1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+.order-status-div:has(.status-icon) {
+    background-color: #000;
+    color: #eaeaea;
+}
+
+.order-status-div p {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #000;
+    top: -110%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ordered-products-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ordered-product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #000;
+}
+
+.ordered-product-container a {
+    grid-row: span 2;
+}
+
+.ordered-product-container a img {
+    width: 6rem;
+}
+
+.ordered-product-container p {
+    font-weight: 550;
+}
+
+.order-total-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+}
+
+.order-total-container h3 {
+    font-weight: 550;
+    font-size: clamp(1rem, 7vw - 11.2px, 1.2rem);
+}
+
+.order-total-container h3:last-child {
+    margin-left: auto;
+}
+
+.order-total-container .price-details-icon {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.order-total-container .price-details-icon p {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 1;
+    background: #ededed;
+    border-radius: 6.5px;
+    box-shadow: 0 0 30px #c0c0c0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 150%;
+    white-space: nowrap;
+    padding: 0.35rem 0.65rem;
+    transform-origin: bottom center;
+    transform: scale(0);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+}
+
+.order-total-container .price-details-icon:hover p {
+    transform: scale(1);
+}
+
+.delivery-address-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.delivery-address-div h4 {
+    font-size: 1.1rem;
+}
+
+.delivery-address-div p {
+    line-height: 150%;
+}
+
+@media (pointer: coarse) {
+
+    .orders-back-icon:hover {
+        background-color: #000;
+    }
+
+    .orders-back-icon:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+}
+
+@media screen and (max-width: 1050px) {
+
+    .order-details-wrapper {
+        width: 100%;
+    }
+
+    .order-details-container {
+        max-height: max-content;
+        width: min(30rem, 100%);
+        position: static;
+    }
+
+    .orders-back-icon {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .order-details-container:has(.no-order-found) {
+        height: calc(100svh - 20rem);
+    }
+}

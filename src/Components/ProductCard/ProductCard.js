@@ -7,7 +7,7 @@ import './ProductCard.css'
 export default function ProductCard(props) {
     return (
         <motion.div layout className='product-card'>
-            <Link to={`details/${props.id}`}>
+            <Link to={`details/${props.id}`} onClick={props.clickHandler || (() => { })}>
                 <div className="card-img"><img src={props.img} alt={props.title} /></div>
                 <h3>{props.title}</h3>
                 <div className="info">
@@ -21,6 +21,7 @@ export default function ProductCard(props) {
                     </div>
                     <p>{props.review}</p>
                 </div>
+                <div className="product-card-subscription">{props.subscription}</div>
             </Link>
         </motion.div>
     )

@@ -1,0 +1,131 @@
+.order-history-wrapper {
+    width: 100%;
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.no-order {
+    margin-top: 5rem;
+}
+
+.order-history-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+}
+
+.order-history-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.order-history-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.order-history-cards-container a {
+    width: 25rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    color: #000;
+    text-decoration: none;
+    transition: transform 0.25s ease;
+}
+
+.order-history-cards-container a:active {
+    transform: scale(0.95);
+}
+
+.order-history-cards-container a.active {
+    background-color: #ddd;
+}
+
+.order-history-img-div {
+    grid-row: span 3;
+    position: relative;
+    max-width: 6rem;
+    height: 6.23rem;
+    display: flex;
+    align-items: center;
+}
+
+.order-history-img-div img {
+    width: 100%;
+}
+
+.order-history-img-div:not([data-products='+0'])::after {
+    content: attr(data-products);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eaeaea;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    bottom: 0.9rem;
+}
+
+.order-history-cards-container a h4 {
+    font-weight: 600;
+}
+
+.order-other-info-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-other-info-div p {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.order-other-info-div p:first-child {
+    border-right: 1px dashed #000;
+    padding-right: 0.5rem;
+}
+
+.order-other-info-div p:last-child {
+    text-align: end;
+    padding-left: 0.5rem;
+}
+
+@media screen and (max-width: 1050px) {
+
+    .order-history-container {
+        justify-content: center;
+    }
+
+    .order-history-cards-wrapper {
+        width: 100%;
+    }
+
+    .order-history-cards-container a {
+        width: min(30rem, 100%);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .order-other-info-div p:last-child span {
+        display: none;
+    }
+}

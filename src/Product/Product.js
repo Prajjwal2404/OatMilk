@@ -1,8 +1,10 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { Calcium, Protien, Fiber, Vitamin } from '../Illustrations/Nutrients'
+import { Vegan, Gluten, Dairy, Soy, Nut, Gmo, Flavor, Color, Sugar, Preservative } from '../Illustrations/Free'
 import nushoat from '../Img/nushoat.webp'
 import Packaging from '../Illustrations/Packaging'
-import Message from '../Message/Message'
+import Message from '../Components/Message/Message'
 import useMedia from '../Utils/Media'
 import './Product.css'
 
@@ -31,7 +33,7 @@ export default function Product() {
 
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 
-    const labelX = useTransform(scrollYProgress, isTablet ? [0.07, 0.33, 0.405, 0.665, 0.74, 1] : [0, 0.25, 0.35, 0.6, 0.7, 0.95], [-10, -585, -585, -1175, -1175, -1760])
+    const labelX = useTransform(scrollYProgress, isTablet ? [0.07, 0.33, 0.405, 0.665, 0.74, 1] : [0, 0.25, 0.35, 0.6, 0.7, 0.95], [40, -160, -160, -360, -360, -560])
 
     const bottleX = useTransform(scrollYProgress, [0, 0.25, 0.35, 0.6, 0.7, 0.95], [0, (container.width * -0.4 - 144), (container.width * -0.4 - 144), (container.width * -0.015), (container.width * -0.015), (container.width * -0.4 - 144)])
 
@@ -54,7 +56,7 @@ export default function Product() {
                         initial="initial"
                         animate="animate"
                         transition={{ delay: 0.25 }}>
-                        As good as{isTablet ? ' ' : <br />}it gets.
+                        Do you, uh,{isTablet ? ' ' : <br />}Oats?
                     </motion.h1>
                     <motion.div
                         variants={variantB}
@@ -74,19 +76,25 @@ export default function Product() {
                     <div className="oatmilk-bottle-div" />
                     <motion.div className="info-div" key={isTablet} style={{ y: isTablet ? infoY : 0 }}>
                         {!isTablet && <><h1>Boring, but important!</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id neque nemo veniam provident voluptas voluptatem ipsa eligendi, ratione, rerum debitis molestiae fuga ab consequuntur! Dolorum ullam molestiae officia voluptate, iste animi sit odio, magnam, nemo vitae tenetur nostrum perferendis? Nesciunt a eaque quidem pariatur.</p></>}
+                            <p>With no preservatives or added sugar, we're just the right step towards healthier dairy alternative. Ingredients: Water, Oats, Canola Oil, Calcium Carbonate, Dipotassium Phosphate, Guar Gum</p>
+                            <div className='nutrition-div'><Calcium /><Protien /><Fiber /><Vitamin /></div></>}
                         {isTablet && <>
                             <motion.div className="info-wrapper wrapper-first" style={{ '--margin-value': infoLeft }}>
                                 <h1>Boring, but important!</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id neque nemo veniam provident voluptas voluptatem ipsa eligendi, ratione, rerum debitis molestiae fuga ab consequuntur! Dolorum ullam molestiae officia voluptate, iste animi sit odio, magnam, nemo vitae tenetur nostrum perferendis? Nesciunt a eaque quidem pariatur.</p>
+                                <p>With no preservatives or added sugar, we're just the right step towards healthier dairy alternative. Ingredients: Water, Oats, Canola Oil, Calcium Carbonate, Dipotassium Phosphate, Guar Gum</p>
+                                <div className='nutrition-div'><Calcium /><Protien /><Fiber /><Vitamin /></div>
                             </motion.div>
                             <div className="info-wrapper">
                                 <h1>We are Transparent</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id neque nemo veniam provident voluptas voluptatem ipsa eligendi, ratione, rerum debitis molestiae fuga ab consequuntur! Dolorum ullam molestiae officia voluptate, iste animi sit odio, magnam, nemo vitae tenetur nostrum perferendis? Nesciunt a eaque quidem pariatur.</p>
+                                <p>For a reason. Natural and preservative-free, our product may settle a bit, but fret not—simply give it a good shake before use.</p>
+                                <p>Every bottle sold is a huge win for our planet, reflecting our unwavering commitment to sustainability. Also, no animals were harmed in the making of this product.</p>
                             </div>
                             <div className="info-wrapper">
-                                <h1>FREE</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id neque nemo veniam provident voluptas voluptatem ipsa eligendi, ratione, rerum debitis molestiae fuga ab consequuntur! Dolorum ullam molestiae officia voluptate, iste animi sit odio, magnam, nemo vitae tenetur nostrum perferendis? Nesciunt a eaque quidem pariatur.</p>
+                                <h1>The good stuff</h1>
+                                <div className='free-div'>
+                                    <Vegan /><Gluten /><Dairy /><Soy /><Nut />
+                                    <Gmo /><Flavor /><Color /><Sugar /><Preservative />
+                                </div>
                             </div>
                         </>}
                     </motion.div>
@@ -94,15 +102,19 @@ export default function Product() {
                 <div className="product-info-container">
                     {!isTablet && <><div className="info-div">
                         <h1>We are Transparent</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id neque nemo veniam provident voluptas voluptatem ipsa eligendi, ratione, rerum debitis molestiae fuga ab consequuntur! Dolorum ullam molestiae officia voluptate, iste animi sit odio, magnam, nemo vitae tenetur nostrum perferendis? Nesciunt a eaque quidem pariatur.</p>
+                        <p>For a reason. Natural and preservative-free, our product may settle a bit, but fret not—simply give it a good shake before use.</p>
+                        <p>Every bottle sold is a huge win for our planet, reflecting our unwavering commitment to sustainability. Also, no animals were harmed in the making of this product.</p>
                     </div>
                         <div className="oatmilk-bottle-div" /></>}
                 </div>
                 <div className="product-info-container">
                     {!isTablet && <><div className="oatmilk-bottle-div" />
-                        <div className="info-div">
-                            <h1>FREE</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id neque nemo veniam provident voluptas voluptatem ipsa eligendi, ratione, rerum debitis molestiae fuga ab consequuntur! Dolorum ullam molestiae officia voluptate, iste animi sit odio, magnam, nemo vitae tenetur nostrum perferendis? Nesciunt a eaque quidem pariatur.</p>
+                        <div className="info-div last">
+                            <h1>The good stuff</h1>
+                            <div className='free-div'>
+                                <Vegan /><Gluten /><Dairy /><Soy /><Nut />
+                                <Gmo /><Flavor /><Color /><Sugar /><Preservative />
+                            </div>
                         </div></>}
                 </div>
             </div>

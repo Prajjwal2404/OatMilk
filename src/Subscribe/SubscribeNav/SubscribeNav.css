@@ -1,0 +1,111 @@
+.subscribe-container {
+    width: 100%;
+    padding-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.subscribe-nav-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.subscribe-back-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: 0 -50%;
+    font-size: 1.25rem;
+    color: #eaeaea;
+    background-color: #000;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.subscribe-back-icon:hover {
+    background-color: #353535;
+}
+
+.subscribe-back-icon:active {
+    transform: scale(0.95);
+}
+
+.subscribe-nav-div nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.5rem, 5.6vw - 14px, 1rem);
+    width: min(27rem, 85%);
+}
+
+.subscribe-nav-div nav a {
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.25s ease;
+}
+
+.subscribe-nav-div nav a:active {
+    transform: scale(0.95);
+}
+
+.subscribe-nav-div nav a.active {
+    color: darksalmon;
+}
+
+.subscribe-nav-div nav hr {
+    flex-grow: 1;
+    height: 1px;
+    border: none;
+    background-color: #000;
+}
+
+.placed-container {
+    margin-inline: auto;
+}
+
+.placed-icon {
+    font-size: 10rem;
+    color: green;
+}
+
+@media (pointer: coarse) {
+    .subscribe-back-icon:hover {
+        background-color: #000;
+    }
+
+    .subscribe-back-icon:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .subscribe-nav-div {
+        padding-top: 1.5rem;
+    }
+
+    .subscribe-nav-div.cartnav {
+        padding-top: 0;
+    }
+
+    .subscribe-back-icon {
+        top: -1rem;
+        translate: 0 0;
+    }
+}

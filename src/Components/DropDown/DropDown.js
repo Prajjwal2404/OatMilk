@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { IoIosArrowDown } from "react-icons/io"
 import './DropDown.css'
 
-export default function DropDown({ items, selected, setSelected, name }) {
+export default function DropDown({ items, selected, setSelected, name, classname }) {
 
     const ref = useRef([])
 
@@ -16,7 +16,6 @@ export default function DropDown({ items, selected, setSelected, name }) {
     }
 
     useEffect(() => {
-        setSelected(items[0])
         function checkDropDown(event) {
             if (!ref.current[0]?.contains(event.target) && !ref.current[1]?.contains(event.target) &&
                 ref.current[1]?.classList.contains('open')) openClose()
@@ -30,7 +29,7 @@ export default function DropDown({ items, selected, setSelected, name }) {
 
 
     return (
-        <div className='dropdown-container'>
+        <div className={`dropdown-container ${classname ? classname : ''}`}>
             <button type='button' className='dropdown-btn' onClick={openClose} ref={el => ref.current[0] = el}>
                 {selected}
                 <IoIosArrowDown />

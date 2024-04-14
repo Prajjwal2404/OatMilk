@@ -1,0 +1,94 @@
+.about-intro-container {
+    min-height: 100svh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 2rem;
+}
+
+.about-intro-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+    gap: 5rem;
+}
+
+.about-intro {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 2rem;
+}
+
+.about-intro img {
+    width: 25rem;
+}
+
+.about-mission {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5rem;
+}
+
+.about-mission p {
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.nushnjay-logo-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 2rem;
+    margin-block: 5rem;
+}
+
+.nushnjay-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nushnjay-logo-wrapper img {
+    width: 20rem;
+}
+
+.nushnjay-logo-wrapper h1 {
+    font-size: 2.5rem;
+}
+
+@media screen and (max-width: 800px) {
+    .about-intro-wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+    }
+
+    .about-intro {
+        flex-direction: column;
+    }
+
+    .about-intro:last-child {
+        flex-direction: column-reverse;
+    }
+
+    .about-mission {
+        align-items: center;
+        text-align: center;
+        max-width: 30rem;
+        width: auto;
+    }
+
+    .nushnjay-logo-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+}

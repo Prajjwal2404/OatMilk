@@ -1,7 +1,7 @@
 import React from 'react'
 import HomeHero from './HomeHero/HomeHero'
 import Intro from './Intro/Intro'
-import Message from '../Message/Message'
+import Message from '../Components/Message/Message'
 import Mountains from '../Illustrations/Mountains'
 
 export default function Home() {

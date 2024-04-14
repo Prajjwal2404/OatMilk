@@ -4,38 +4,32 @@ import './AboutEnvironment.css'
 
 export default function AboutEnvironment() {
     return (
-        <>
+        <div className='environment-intro-container'>
+            <h1>Dedicated to making a difference!</h1>
             <div className='about-environment-wrapper'>
                 <div className="about-environment-container">
                     <div className='about-environment-img-wrapper'><img src={earth} alt='earth' /></div>
                     <div className="about-environment-sub-container">
                         <div className="about-environment-div">
-                            <h1>Less</h1>
-                            <p>Oat milk uses 80% less land, produces less than one-third the greenhouse gas emissions and uses just 4% of the water required to produce one-litre of dairy milk.</p>
+                            <h1>Our Approach</h1>
+                            <p>At Oats by Nush, we are committed to nurturing a more sustainable planet through every step of our journey. Our approach revolves around three key pillars :-</p>
                         </div>
                         <div className="about-environment-div">
-                            <h1>Local</h1>
-                            <p>Locally produced right here in Nepal. Our oat milk doesn't have to travel tens of thousands kilometres to get you.</p>
+                            <h2>Responsible Sourcing</h2>
+                            <p>We meticulously select our oat ingredients from suppliers who share our values of sustainability and ethical practices. We partner with suppliers who cultivate oats using advanced, eco friendly methods, substantially decreasing greenhouse gas emissions.</p>
                         </div>
                         <div className="about-environment-div">
-                            <h1>Circular</h1>
-                            <p>Our factory aspires to be zero-waste and we recollect and filter water where possible. In addition, we aspire to use by-products of our production process to create food & other materials.</p>
+                            <h2>Eco-friendly Production</h2>
+                            <p>We employ innovative and eco-conscious manufacturing processes to minimize waste and reduce energy consumption. From water saving techniques to renewable energy sources, we are constantly seeking ways to minimize our environmental impact.</p>
                         </div>
                         <div className="about-environment-div">
-                            <h1>Glass</h1>
-                            <p>When considering our packaging, we employed a systems-approach to the design process. Our packaging is not only plastic-free, it's created form 'high-value' glass which is widely collected & recycled.</p>
+                            <h2>Packaging Sustainability</h2>
+                            <p>We're dedicated to reducing packaging waste by utilizing recyclable and biodegradable materials whenever possible. Additionally, we're exploring innovative packaging solutions, such as compostable packaging, to further minimize our environmental footprint.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="our-mission-wrapper">
-                <div className="our-misson-div">
-                    <h1>How can you take part in the global mission?</h1>
-                    <p>By choosing us, you are creating an impact on all the pressing issues for nature. We are proud of your choice and so should be you! And if you haven't tried out the earth-friendly (and tasty as well) alternative, place an enquiry now!</p>
-                    <p>We, at OatMlk, are a team of responsible global citizens who are striving to turn milk into personal moments of health and joy people, without recklessly deteriorating the planet's resources in the process.</p>
-                    <p>Just drop us a line below.</p>
-                </div>
-            </div>
-        </>
+            <h2>Through these initiatives, we're not just creating delicious oat-based products, we're also championing sustainability and paving the way towards a greener, healthier planet for generations to come.</h2>
+        </div>
     )
 }

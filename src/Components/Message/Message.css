@@ -21,6 +21,10 @@
     gap: 1rem;
 }
 
+.message-form.disable {
+    pointer-events: none;
+}
+
 .message-form h2 {
     width: 100%;
     margin-left: 0.5rem;
@@ -41,6 +45,10 @@
     font-weight: 500;
 }
 
+.message-form textarea {
+    resize: vertical;
+}
+
 .input-icon {
     position: absolute;
     left: 0.5rem;
@@ -49,8 +57,14 @@
     color: #656565;
 }
 
-.message-form button {
+.message-btn-div {
     align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.message-btn-div button {
     padding: 0.5rem 5rem;
     border: none;
     border-radius: 10px;
@@ -62,20 +76,24 @@
     transition: transform 0.25s ease, background-color 0.25s ease;
 }
 
-.message-form button:hover {
+.message-btn-div button:hover {
     background-color: #353535;
 }
 
-.message-form button:active {
+.message-btn-div button:active {
     transform: scale(0.95);
 }
 
+.message-btn-div h4 {
+    color: green;
+}
+
 @media (pointer: coarse) {
-    .message-form button:hover {
+    .message-btn-div button:hover {
         background-color: black;
     }
 
-    .message-form button:active {
+    .message-btn-div button:active {
         background-color: #353535;
     }
 }

@@ -1,11 +1,13 @@
-import { db, auth } from "../Db/FirebaseConfig"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { doc, getDoc, setDoc } from "firebase/firestore/lite"
+import { db, auth, queryClient } from "../Db/FirebaseConfig"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup, signInWithRedirect, EmailAuthProvider, linkWithCredential, linkWithPopup, linkWithRedirect } from "firebase/auth"
+import { deleteField, doc, getDoc, setDoc, updateDoc } from "firebase/firestore/lite"
 import { CurrentUser } from "./HandleUser"
 
-export default async function HandleAuth(formData) {
+export default async function handleAuth(formData) {
 
     const intent = formData.get('intent')
+
+    const currentuser = await CurrentUser()
 
     if (intent === 'login') {
         try {
@@ -15,11 +17,12 @@ export default async function HandleAuth(formData) {
             else {
                 await setPersistence(auth, browserLocalPersistence)
             }
+            if (currentuser?.isAnonymous) await anonymousCleanUp()
             await signInWithEmailAndPassword(auth, formData.get('logMail'), formData.get('logPass'))
             return { redirect: true }
         }
         catch (err) {
-            if (err.message == 'Firebase: Error (auth/invalid-credential).') {
+            if (err.code === 'auth/invalid-credential') {
                 throw { login: 'Incorrect email or password' }
             }
             else {
@@ -32,18 +35,28 @@ export default async function HandleAuth(formData) {
     else if (intent === 'register') {
 
         try {
-            await createUserWithEmailAndPassword(auth, formData.get('regMail'), formData.get('regPass'))
-            const user = await CurrentUser()
-            const userRef = doc(db, 'Users', user.uid)
-            const fields = {
-                username: formData.get('regUser'), email: user.email.toLowerCase(),
-                subscriptions: [], cart: [], addresses: [], orders: []
+            if (currentuser?.isAnonymous) {
+                const credential = EmailAuthProvider.credential(formData.get('regMail'), formData.get('regPass'))
+                await linkWithCredential(currentuser, credential)
+                const userDocRef = doc(db, 'Users', currentuser.uid)
+                const fields = {
+                    username: formData.get('regUser'), email: formData.get('regMail').toLowerCase(), expiresAt: deleteField()
+                }
+                await updateDoc(userDocRef, fields)
+                await queryClient.invalidateQueries({ queryKey: ['userData'] })
             }
-            await setDoc(userRef, fields)
+            else {
+                await createUserWithEmailAndPassword(auth, formData.get('regMail'), formData.get('regPass'))
+                const userDocRef = doc(db, 'Users', (await CurrentUser()).uid)
+                const fields = {
+                    username: formData.get('regUser'), email: formData.get('regMail').toLowerCase(), cart: [], addresses: []
+                }
+                await setDoc(userDocRef, fields)
+            }
             return { redirect: true }
         }
         catch (err) {
-            if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
+            if (err.code === 'auth/email-already-in-use') {
                 throw { register: 'Email already registered' }
             }
             else {
@@ -53,26 +66,65 @@ export default async function HandleAuth(formData) {
         }
     }
 
-    else if (intent === 'signin') {
+    else if (intent === 'signinDesktop' || intent === 'signupDesktop') {
 
         try {
             const provider = new GoogleAuthProvider()
-            await signInWithPopup(auth, provider)
-            const user = await CurrentUser()
-            const userRef = doc(db, 'Users', user.uid)
-            const userSnapshot = await getDoc(userRef)
-            if (!userSnapshot.exists()) {
+            provider.setCustomParameters({ prompt: 'select_account' })
+            if (currentuser?.isAnonymous && intent === 'signupDesktop') {
+                const credential = await linkWithPopup(currentuser, provider)
+                const userDocRef = doc(db, 'Users', currentuser.uid)
                 const fields = {
-                    username: user.providerData[0].displayName, email: user.email.toLowerCase(),
-                    subscriptions: [], cart: [], addresses: [], orders: []
+                    username: credential.user.providerData[0].displayName, email: credential.user.email.toLowerCase(),
+                    expiresAt: deleteField()
                 }
-                await setDoc(userRef, fields)
+                await updateDoc(userDocRef, fields)
+                await queryClient.invalidateQueries({ queryKey: ['userData'] })
+            }
+            else {
+                if (currentuser?.isAnonymous) await anonymousCleanUp()
+                await signInWithPopup(auth, provider)
+                const user = await CurrentUser()
+                const userDocRef = doc(db, 'Users', user.uid)
+                const userSnapshot = await getDoc(userDocRef)
+                if (!userSnapshot.exists()) {
+                    const fields = {
+                        username: user.providerData[0].displayName, email: user.email.toLowerCase(), cart: [], addresses: []
+                    }
+                    await setDoc(userDocRef, fields)
+                }
             }
             return { redirect: true }
         }
         catch (err) {
-            console.error(err)
-            alert(err.message)
+            if (err.code === 'auth/credential-already-in-use') {
+                throw { signup: 'Google account already registered' }
+            }
+            else {
+                console.error(err)
+                alert(err.message)
+            }
+        }
+    }
+
+    else if (intent === 'signinMobile' || intent === 'signupMobile') {
+        try {
+            const provider = new GoogleAuthProvider()
+            provider.setCustomParameters({ prompt: 'select_account' })
+            if (currentuser?.isAnonymous && intent === 'signupMobile') await linkWithRedirect(currentuser, provider)
+            else {
+                if (currentuser?.isAnonymous) await anonymousCleanUp()
+                await signInWithRedirect(auth, provider)
+            }
+        }
+        catch (err) {
+            if (err.code === 'auth/credential-already-in-use') {
+                throw { signup: 'Google account already registered' }
+            }
+            else {
+                console.error(err)
+                alert(err.message)
+            }
         }
     }
 
@@ -83,7 +135,7 @@ export default async function HandleAuth(formData) {
             return { redirect: false }
         }
         catch (err) {
-            if (err.message == 'Firebase: Error (auth/invalid-email).') {
+            if (err.code === 'auth/invalid-email') {
                 throw { reset: "Invalid email" }
             }
             else {
@@ -92,4 +144,40 @@ export default async function HandleAuth(formData) {
             }
         }
     }
+}
+
+export async function handleRedirect() {
+    try {
+        const user = await CurrentUser()
+        if (user?.uid) {
+            const userDocRef = doc(db, 'Users', user.uid)
+            const userSnapshot = await getDoc(userDocRef)
+            if (!userSnapshot.exists()) {
+                const fields = {
+                    username: user.providerData[0].displayName, email: user.email.toLowerCase(), cart: [], addresses: []
+                }
+                await setDoc(userDocRef, fields)
+                await queryClient.invalidateQueries({ queryKey: ['userData'] })
+            }
+            else if (userSnapshot.get('expiresAt')) {
+                const fields = {
+                    username: user.providerData[0].displayName, email: user.email.toLowerCase(), expiresAt: deleteField()
+                }
+                await updateDoc(userDocRef, fields)
+                await queryClient.invalidateQueries({ queryKey: ['userData'] })
+            }
+            return { redirect: true }
+        }
+    }
+    catch (err) {
+        console.error(err)
+        alert(err.message)
+    }
+}
+
+async function anonymousCleanUp() {
+    await queryClient.invalidateQueries({ queryKey: ['currentuser'] })
+    await queryClient.invalidateQueries({ queryKey: ['userData'] })
+    await queryClient.invalidateQueries({ queryKey: ['subscribed'] })
+    await queryClient.invalidateQueries({ queryKey: ['subscriptionsData'] })
 }

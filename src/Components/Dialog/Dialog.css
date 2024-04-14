@@ -1,0 +1,100 @@
+.dialog-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease;
+}
+
+.dialog-wrapper:has(.show) {
+    pointer-events: initial;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.confirm-dialog {
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scale: 0;
+    transition: scale 0.25s ease;
+}
+
+.confirm-dialog.show {
+    scale: 1;
+}
+
+.confirm-dialog form {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.confirm-dialog form.disable {
+    pointer-events: none;
+}
+
+.confirm-dialog form input {
+    display: none;
+}
+
+.confirm-dialog button {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #eaeaea;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.confirm-dialog button.close {
+    background-color: #000;
+}
+
+.confirm-dialog button.close:hover {
+    background-color: #353535;
+}
+
+.confirm-dialog button.confirm {
+    background-color: crimson;
+}
+
+.confirm-dialog button.confirm:hover {
+    background-color: red;
+}
+
+.confirm-dialog button.close:active,
+.confirm-dialog button.confirm:active {
+    transform: scale(0.95);
+}
+
+@media (pointer: coarse) {
+    .confirm-dialog button.close:hover {
+        background-color: #000;
+    }
+
+    .confirm-dialog button.close:active {
+        background-color: #353535;
+        transform: scale(0.95);
+    }
+
+    .confirm-dialog button.confirm:hover {
+        background-color: crimson;
+    }
+
+    .confirm-dialog button.confirm:active {
+        background-color: red;
+        transform: scale(0.95);
+    }
+}

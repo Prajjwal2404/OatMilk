@@ -10,7 +10,6 @@ import Salt from '../../Illustrations/Salt'
 import Oil from '../../Illustrations/Oil'
 import Bonfire from '../../Illustrations/Bonfire'
 import Filling from '../../Illustrations/Filling'
-import OatMilk from '../../Img/oatmilk.png'
 import useRem from '../../Utils/Rem'
 import './Processes.css'
 
@@ -85,7 +84,7 @@ export default function Processes() {
                         className="process-about-div"
                         style={{ x: millingX, opacity: millingOpacity }}>
                         <h1>Milling</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p>It all begins as trucks laden with the finest oat kernels, meticulously cleaned, peeled, and dried, arrive at our factory gates. Now, the milling magic begins!</p>
                     </motion.div>
                 </div>
                 <div className="processes-div">
@@ -103,7 +102,7 @@ export default function Processes() {
                         className="process-about-div"
                         style={{ x: waterX, opacity: waterOpacity }}>
                         <h1>Mixing Water</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p>In this stage, milled oats are blended with water, forming a smooth, creamy mixture akin to porridge. This essential step ensures the oats are perfectly liquefied to help create the beloved drink we all love.</p>
                     </motion.div>
                 </div>
                 <div className="processes-div">
@@ -118,7 +117,7 @@ export default function Processes() {
                         className="process-about-div"
                         style={{ x: enzymeX, opacity: enzymeOpacity }}>
                         <h1>Enzyming</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p> Afterward, the blend of oat and water undergoes enzymatic treatment in our specialized tank, where the real magic unfolds. Natural enzymes work their wonders, breaking down oat starch into 'simpler' sugars, giving the product a natural sweetness.</p>
                     </motion.div>
                 </div>
                 <div className="processes-div">
@@ -129,14 +128,14 @@ export default function Processes() {
                         <motion.div
                             className="filtered"
                             style={{ x: filteredX, y: filteredY, scale: filteredScale }}>
-                            <Container liquid='#ded7c6' bubbles={filteredFill} />
+                            <Container liquid='#f3e3c6' bubbles={filteredFill} />
                         </motion.div>
                     </div>
                     <motion.div
                         className="process-about-div"
                         style={{ x: filtrationX, opacity: filtrationOpacity }}>
                         <h1>Filtration</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p>Next, in our filtration tank, we expertly separate out any insoluble bits, ensuring that only the pure, wholesome goodness remains alongside our filtered oat base.</p>
                     </motion.div>
                 </div>
                 <div className="processes-div">
@@ -156,7 +155,7 @@ export default function Processes() {
                         className="process-about-div"
                         style={{ x: ingredientsX, opacity: ingredientsOpacity }}>
                         <h1>Ingredients</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p>Now, we enhance the oat base with essential ingredients including vitamins and minerals, ensuring a perfectly balanced nutritional profile as we transform it into creamy oat milk.</p>
                     </motion.div>
                 </div>
                 <div className="processes-div">
@@ -171,7 +170,7 @@ export default function Processes() {
                         className="process-about-div"
                         style={{ x: heatingX, opacity: heatingOpacity }}>
                         <h1>Heat Treatment</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p>We use pasteurization to extend the shelf life of our oat milk before packaging. To ensure proper mixing and consistency, we pass the oat milk through a homogenizer. Occasionally, our product might separate, which is why our bottles remind you to 'shake well!' before enjoying.</p>
                     </motion.div>
                 </div>
                 <div className="processes-div">
@@ -184,11 +183,14 @@ export default function Processes() {
                         className="process-about-div"
                         style={{ x: bottlingX, opacity: bottlingOpacity }}>
                         <h1>Bottling</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ullam animi atque hic nulla delectus sed consectetur, maxime corporis. Hic enim tempora excepturi explicabo minus ratione quidem ducimus rerum sit?</p>
+                        <p>Our oat milk is then bottled into beautiful, recyclable and reusable glass bottles, ready to be sent to you as soon as possible for you to enjoy!</p>
                     </motion.div>
                 </div>
             </div>
-            <div className="final-product"><img src={OatMilk} alt="OatMilk" /></div>
+            <div className="final-product">
+                <img src='https://firebasestorage.googleapis.com/v0/b/nush-oats.appspot.com/o/Product-Images%2Foatmilk%2Foatmilk500mlfront.webp?alt=media&token=f96a7442-066d-4eec-ab67-d0fef6b6624e' alt="OatMilk" />
+                <h1>And it's all worth it!</h1>
+            </div>
         </>
     )
 }
