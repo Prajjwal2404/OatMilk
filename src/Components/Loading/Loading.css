@@ -19,3 +19,8 @@
         transform: rotate(360deg);
     }
 }
+
+.submitting-dots {
+    font-family: monospace;
+    font-size: 0.8rem;
+}

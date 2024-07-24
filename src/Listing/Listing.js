@@ -10,8 +10,7 @@ import './Listing.css'
 export function loader() {
     return defer({
         dataSet: queryClient.fetchQuery({
-            queryKey: ['productsData'], queryFn: () => data().then(res => res.sort((a, b) => a.Sno - b.Sno)),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['productsData'], queryFn: () => data().then(res => res.sort((a, b) => a.Sno - b.Sno))
         })
     })
 }

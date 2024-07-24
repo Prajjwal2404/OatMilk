@@ -38,4 +38,4 @@ export async function user(id) {
     return { ...userSnapshot.data(), id: userSnapshot.id }
 }
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: Infinity, gcTime: Infinity } } })

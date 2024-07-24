@@ -90,10 +90,6 @@
 
 @media screen and (max-width: 650px) {
 
-    .environment-intro-container {
-        padding-inline: 3rem;
-    }
-
     .environment-intro-container h1 {
         font-size: 2rem;
     }

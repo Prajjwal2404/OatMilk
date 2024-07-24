@@ -33,6 +33,13 @@
     gap: 0.5rem;
 }
 
+.fullName-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
 .add-form input,
 .add-form textarea {
     width: 100%;
@@ -64,15 +71,21 @@
     justify-content: space-between;
 }
 
-.state-city-div input[name="district"] {
+.state-city-div input[name="district"],
+.fullName-div input[name="title"] {
     display: none;
+}
+
+.fullName-div .small {
+    min-width: 5rem;
 }
 
 .state-city-div .small {
     width: calc(50% - clamp(1rem, 17.5vw - 49px, 1.5rem));
 }
 
-.state-city-div .dropdown-container.small .dropdown-btn {
+.state-city-div .dropdown-container.small .dropdown-btn,
+.fullName-div .dropdown-container.small .dropdown-btn {
     width: 100%;
     aspect-ratio: unset;
     padding: 0.75rem 1rem;
@@ -85,7 +98,8 @@
     transition: background-color 0.25s ease;
 }
 
-.state-city-div .dropdown-container.small .dropdown-btn:hover {
+.state-city-div .dropdown-container.small .dropdown-btn:hover,
+.fullName-div .dropdown-container.small .dropdown-btn:hover {
     background-color: rgba(215, 215, 215, 0.5);
 }
 
@@ -232,11 +246,13 @@
         transform: scale(0.95);
     }
 
-    .state-city-div .dropdown-container.small .dropdown-btn:hover {
+    .state-city-div .dropdown-container.small .dropdown-btn:hover,
+    .fullName-div .dropdown-container.small .dropdown-btn:hover {
         background-color: #fff;
     }
 
-    .state-city-div .dropdown-container.small .dropdown-btn:active {
+    .state-city-div .dropdown-container.small .dropdown-btn:active,
+    .fullName-div .dropdown-container.small .dropdown-btn:active {
         background-color: rgba(215, 215, 215, 0.5);
     }
 

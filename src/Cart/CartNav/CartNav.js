@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { NavLink, Outlet, useSearchParams, Link, useOutletContext } from 'react-router-dom'
 import { queryClient } from '../../Db/FirebaseConfig'
 import RequireAuth, { CurrentUser } from '../../Utils/HandleUser'
@@ -6,23 +6,31 @@ import { IoCheckmarkCircle } from "react-icons/io5"
 
 export async function loader({ request }) {
     await RequireAuth(request)
-    const checkKey = localStorage.getItem('cartData')
+    const checkKey = sessionStorage.getItem('cartData')
     if (checkKey) {
-        const userId = await queryClient.fetchQuery({ queryKey: ['currentuser'], queryFn: () => CurrentUser(), staleTime: Infinity, gcTime: Infinity }).then(res => res.uid)
+        const userId = await queryClient.fetchQuery({
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
+        }).then(res => res.uid)
         const keyData = JSON.parse(checkKey)
         const currentTime = new Date().getTime()
         const expireTime = keyData.timeStamp + 600000
-        if (keyData.userId !== userId || currentTime > expireTime)
-            localStorage.removeItem('subscriptionData')
+        if (keyData.userId !== userId || currentTime > expireTime) {
+            sessionStorage.removeItem('cartData')
+            queryClient.removeQueries({ queryKey: 'cartDiscount' })
+        }
     }
     return null
 }
 
 export default function CartNav() {
 
+    const stateData = queryClient.getQueryData('cartDiscount')
     const { cartItems } = useOutletContext()
-
     const [searchParams] = useSearchParams()
+    const [discount, setDiscount] = useState(0)
+
+    useLayoutEffect(() => { if (stateData) setDiscount(stateData) }, [])
+    useEffect(() => { queryClient.setQueryData('cartDiscount', discount) }, [discount])
 
     if (searchParams.get('success') === '1') {
         return (
@@ -60,7 +68,7 @@ export default function CartNav() {
                     </NavLink>
                 </nav>
             </div>
-            <Outlet />
+            <Outlet context={{ discount, setDiscount }} />
         </div>
     )
 }

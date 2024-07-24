@@ -4,10 +4,7 @@ import { onAuthStateChanged } from "firebase/auth"
 
 export default async function RequireAuth(request, checkAnonymous) {
 
-    const user = await queryClient.fetchQuery({
-        queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-        staleTime: Infinity, gcTime: Infinity
-    })
+    const user = await queryClient.fetchQuery({ queryKey: ['currentuser'], queryFn: () => CurrentUser() })
 
     if (!user) {
         const pathname = new URL(request.url).pathname

@@ -15,12 +15,10 @@ import './Buy.css'
 export async function loader() {
     return defer({
         userCart: queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(res => {
             if (res) return queryClient.fetchQuery({
-                queryKey: ['userData'], queryFn: () => user(res.uid),
-                staleTime: Infinity, gcTime: Infinity
+                queryKey: ['userData'], queryFn: () => user(res.uid)
             })
             else return res
         })

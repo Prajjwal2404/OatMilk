@@ -6,7 +6,7 @@ import handleAuth, { handleRedirect } from '../Utils/HandleAuth'
 import { CurrentUser } from '../Utils/HandleUser'
 import { IoMailOutline, IoLockClosedOutline, IoPersonOutline, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
 import { FcGoogle } from "react-icons/fc"
-import Loading from '../Components/Loading/Loading'
+import Loading, { Submitting } from '../Components/Loading/Loading'
 import useMedia from '../Utils/Media'
 import './Login.css'
 
@@ -142,7 +142,7 @@ function Content({ resultResolved }) {
                             <p>I agree to <Link to='/terms'>Terms of Service</Link> and <Link to='/privacy'>Privacy Policy</Link></p>
                         </label>
                         <button type="submit" className="auth-btn" name='intent' value='register'>
-                            {state === 'submitting' && formData.get('intent') === 'register' ? 'Registering...' : 'Register'}
+                            {state === 'submitting' && formData?.get('intent') === 'register' ? <>Registering<Submitting /></> : 'Register'}
                         </button>
                     </Form>
                     <p className='or-login'>- Or Sign up Using -</p>
@@ -150,7 +150,7 @@ function Content({ resultResolved }) {
                         <button disabled={state === 'submitting'} type='submit' className="google-btn"
                             name='intent' value={signupValue}>
                             <FcGoogle />
-                            {state === 'submitting' && formData.get('intent') === signupValue ? 'Signing...' : 'Google'}
+                            {state === 'submitting' && formData?.get('intent') === signupValue ? <span>Signing<Submitting /></span> : 'Google'}
                         </button>
                         {signup && state === 'idle' && <h4>{signup}</h4>}
                     </Form>
@@ -178,7 +178,7 @@ function Content({ resultResolved }) {
                             <a className="forgot-link" onClick={resetPassToggle}>Forgot Password</a>
                         </div>
                         <button type="submit" className="auth-btn" name='intent' value='login'>
-                            {state === 'submitting' && formData.get('intent') === 'login' ? 'Logging in...' : 'Log in'}
+                            {state === 'submitting' && formData?.get('intent') === 'login' ? <>Logging in<Submitting /></> : 'Log in'}
                         </button>
                     </Form>
                     <p className='or-login'>- Or Sign in Using -</p>
@@ -186,7 +186,7 @@ function Content({ resultResolved }) {
                         <button disabled={state === 'submitting'} type='submit' className="google-btn"
                             name='intent' value={signinValue}>
                             <FcGoogle />
-                            {state === 'submitting' && formData.get('intent') === signinValue ? 'Signing...' : 'Google'}
+                            {state === 'submitting' && formData?.get('intent') === signinValue ? <span>Signing<Submitting /></span> : 'Google'}
                         </button>
                     </Form>
                     <div className="login-register">
@@ -203,7 +203,7 @@ function Content({ resultResolved }) {
                             <input type="email" name="resetMail" autoComplete='email' placeholder='Email' required />
                         </label>
                         <button type="submit" className="auth-btn" name='intent' value='reset'>
-                            {state === 'submitting' && formData.get('intent') === 'reset' ? 'Sending...' : 'Send'}
+                            {state === 'submitting' && formData?.get('intent') === 'reset' ? <>Sending<Submitting /></> : 'Send'}
                         </button>
                     </Form>
                     <div className="login-register">

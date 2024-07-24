@@ -3,9 +3,9 @@ import { db } from "../Db/FirebaseConfig"
 
 export default async function Email(email, name, orderId, products, total, address, mode) {
     const subject = `Your Oats By Nush Order Number ${orderId} has been placed 🌾✨`
-    const orders = products.map(product => (
+    const orders = products.map((product, idx) => (
         `<li>
-            <p style="margin: 0; padding: 0;">Product 1: ${product.title} ${product.size}</p>
+            <p style="margin: 0; padding: 0;">Product ${idx + 1}: ${product.title} ${product.size}</p>
             <p style="margin: 0; padding: 0;">Quantity: ${product.quantity}</p>
             <p style="margin: 0 0 15px 0; padding: 0;">Price: रू ${(product.price).toFixed(2)}</p>
         </li>`
@@ -34,7 +34,7 @@ export default async function Email(email, name, orderId, products, total, addre
     <p style="margin: 0; padding: 0;">Total Amount: रू ${total.toFixed(2)}</p>
     <br style="line-height: 0.25;" />
     <p style="margin: 0; padding: 0;">Shipping Address:</p>
-    <p style="margin: 0; padding: 0;"><strong>${address.fullName}</strong></p>
+    <p style="margin: 0; padding: 0;"><strong>${address.title}. ${address.fullName}</strong></p>
     <p style="margin: 0; padding: 0;">${address.street}</p>
     <p style="margin: 0; padding: 0;">${address.city}, ${address.district}</p>
     <p style="margin: 0; padding: 0;">Phone number: ${address.phone}</p>

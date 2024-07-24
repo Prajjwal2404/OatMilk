@@ -1,7 +1,6 @@
 .product-checkout-wrapper {
     height: 100%;
     width: min(31rem, 100%);
-    padding-inline: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +30,40 @@
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
+    position: relative;
+}
+
+.out-of-stock {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    color: red;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.out-of-stock p {
+    position: absolute;
+    bottom: 100%;
+    right: 0.75rem;
+    z-index: 1;
+    background: #ededed;
+    border-radius: 6.5px;
+    box-shadow: 0 0 30px #c0c0c0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 150%;
+    color: #000;
+    white-space: nowrap;
+    padding: 0.35rem 0.65rem;
+    transform-origin: bottom right;
+    transform: scale(0);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+}
+
+.out-of-stock:hover p {
+    transform: scale(1);
 }
 
 .product-info-card a {
@@ -45,44 +78,11 @@
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
     row-gap: 1rem;
+    column-gap: 0.5rem;
     border-radius: 10px;
     border: 2px solid #d0d0d0;
-}
-
-.checkout-container .delivery-fee-div {
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    position: relative;
-}
-
-.checkout-container .delivery-fee-icon {
-    cursor: pointer;
-}
-
-.checkout-container .delivery-fee-div p:last-child {
-    position: absolute;
-    bottom: 105%;
-    right: -60%;
-    z-index: 1;
-    background: #ededed;
-    border-radius: 6.5px;
-    box-shadow: 0 0 30px #c0c0c0;
-    font-size: 0.8rem;
-    font-weight: 500;
-    line-height: 150%;
-    white-space: nowrap;
-    padding: 0.35rem 0.65rem;
-    transform-origin: bottom center;
-    transform: scale(0);
-    transition: transform 0.25s ease;
-    pointer-events: none;
-}
-
-.checkout-container .delivery-fee-icon:hover+p {
-    transform: scale(1);
 }
 
 .checkout-container h2 {
@@ -97,10 +97,83 @@
 .checkout-container>p:nth-child(odd),
 .checkout-container>p:last-child {
     margin-left: auto;
+    text-align: end;
 }
 
 .checkout-container .discount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    grid-column: 1 / -1;
     color: green;
+    margin-left: -1rem;
+}
+
+.checkout-container .discount .promo-div {
+    position: relative;
+    flex-basis: 11rem;
+    border: 1px solid green;
+    border-left: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.checkout-container .discount .promo-div input {
+    width: calc(100% - 2rem);
+    min-width: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: green;
+    text-transform: uppercase;
+    border: none;
+    outline: none !important;
+}
+
+.checkout-container .discount .promo-div input::placeholder {
+    text-transform: none;
+}
+
+.checkout-container .discount .promo-div .promo-icon {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: scale 0.25s ease;
+}
+
+.checkout-container .discount .promo-div .promo-icon:active {
+    scale: 0.95;
+}
+
+.checkout-container .discount .promo-div.disable {
+    pointer-events: none;
+}
+
+.checkout-container .discount .promo-div.disable::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    padding: 0.4rem;
+    border-radius: 50%;
+    background-color: green;
+    opacity: 0;
+    animation: promo 1s linear infinite forwards;
+}
+
+@keyframes promo {
+    50% {
+        opacity: 1;
+    }
+}
+
+.checkout-container .discount p {
+    white-space: nowrap;
 }
 
 .checkout-container hr {
@@ -115,12 +188,12 @@
     width: 100%;
     padding: 0.75rem;
     border-radius: 10px;
+    border: none;
     background-color: #000;
     font-size: 1.1rem;
     font-weight: 500;
     color: #eaeaea;
-    text-align: center;
-    text-decoration: none;
+    cursor: pointer;
     transition: transform 0.25s ease, background-color 0.25s ease;
 }
 

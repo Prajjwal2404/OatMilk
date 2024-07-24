@@ -8,24 +8,16 @@ export default function ReturnRefund() {
                 <h3>At Oats by Nush, we strive to provide you with the highest quality Oat Milk products. However, if you receive a damaged or defective product, we are here to help.</h3>
             </div>
             <div className="policies-points-container">
-                <h2>Returns</h2>
-                <p>We do not accept returns for any reason other than if the product is damaged or defective upon delivery. We stand behind the quality of our products and ensure they are carefully packaged to arrive in perfect condition.</p>
-            </div>
-            <div className="policies-points-container">
-                <h2>Refunds</h2>
-                <p>We do not offer refunds for any reason other than if the product is damaged or defective upon delivery. Our policy is to provide exchanges for damaged or defective items.</p>
-            </div>
-            <div className="policies-points-container">
-                <h2>Exchanges</h2>
-                <p>If you receive a damaged or defective product, please contact our customer service team as soon as possible. We will promptly arrange for an exchange of the damaged or defective item. To be eligible for an exchange, the product must be unused and in the same condition as when you received it.</p>
+                <h2>Returns, Refunds, or Exchanges</h2>
+                <p>While we do not accept returns or offer refunds, we stand by the quality of our products. If you receive a defective or damaged item, we're happy to arrange an exchange. Simply reach out to our customer service team with photos of the damaged or defective product at <a href='mailto:info@oatsbynush.com' target='_blank' aria-label='email'>info@oatsbynush.com</a>. Please note that to be eligible for an exchange, the product must be unused and in its original condition.</p>
             </div>
             <div className="policies-points-container">
                 <h2>Damaged or Defective Items</h2>
-                <p>If you receive a damaged or defective product, please take photos of the damaged or defective item and email them to <a href='mailto:info@oatsbynush.com' target='_blank' aria-label='email'>info@oatsbynush.com</a>. Our customer service team will review the photos and arrange for an exchange if necessary. We reserve the right to refuse returns or refunds for items that do not meet our return criteria or for items that have been used or damaged by the customer. In the event of any discrepancies or disputes regarding returns or refunds, our decision will be final.</p>
+                <p>If your product arrives damaged or defective, please notify us immediately by <a href='mailto:info@oatsbynush.com' target='_blank' aria-label='email'>email</a> and include photos of the issue. Our team will promptly review the photos and coordinate an exchange if necessary. Please understand that we reserve the right to refuse exchanges for items that do not meet our criteria or have been used or damaged by the customer.</p>
             </div>
             <div className="policies-points-container">
                 <h2>Contact Us</h2>
-                <p>If you have any questions or concerns about our return and refund policy, please contact our customer service team at <a href='mailto:info@oatsbynush.com' target='_blank' aria-label='email'>info@oatsbynush.com</a>. We are here to assist you and ensure your satisfaction with our products.</p>
+                <p>If you have any questions or concerns about our return and exchange policy, don't hesitate to contact us at <a href='mailto:info@oatsbynush.com' target='_blank' aria-label='email'>info@oatsbynush.com</a>. We're dedicated to ensuring your satisfaction with our products and are here to help.</p>
             </div>
         </div>
     )

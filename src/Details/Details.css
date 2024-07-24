@@ -68,21 +68,8 @@
     font-size: 0.95rem;
 }
 
-.price-wt {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    padding-right: 1.5rem;
-}
-
-.price-wt h2 span {
+.details-content-container>h2 span {
     font-size: 0.95rem;
-}
-
-.price-wt h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 2px;
 }
 
 .details-content-container>p {

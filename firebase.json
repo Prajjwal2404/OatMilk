@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "nush-oats",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -10,6 +11,17 @@
       {
         "source": "**",
         "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(webp|svg)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000"
+          }
+        ]
       }
     ]
   }

@@ -10,7 +10,7 @@ export default function Shipping() {
             </div>
             <div className="policies-points-container">
                 <h2>Shipping rates</h2>
-                <p>Delivery fees are Rs 120 for first 1kg and +Rs 50 per kg after that for customers in Kathmandu valley. For customers outside the valley, we appreciate your patience as we work towards extending our services to your region.</p>
+                <p>Delivery fees is रू&nbsp;{Number(process.env.REACT_APP_DELIVERY_FEES).toFixed(2)} for customers in Kathmandu valley. For customers outside the valley, we appreciate your patience as we work towards extending our services to your region.</p>
             </div>
             <div className="policies-points-container">
                 <h2>Shipment confirmation</h2>
@@ -18,7 +18,7 @@ export default function Shipping() {
             </div>
             <div className="policies-points-container">
                 <h2>Damages</h2>
-                <p>Oats by Nush is not liable for any products damaged or lost during shipping. However, to ensure complete customer satisfaction, please contact our support team directly to file a claim for an exchange if you receive a product damaged or defective during delivery. Please save all packaging material and damaged goods before filing a claim.</p>
+                <p>At Oats by Nush, we're committed to your satisfaction. If any products you receive are damaged upon delivery, we're happy to provide replacements to ensure your complete satisfaction. Please contact our support team directly to file a claim for an exchange if you receive a product damaged or defective during delivery. Please save all packaging material and damaged goods before filing a claim.</p>
             </div>
         </div>
     )

@@ -41,6 +41,10 @@
     background-color: #fff;
 }
 
+.checkout-container .discount .promo-div input[name="intent"] {
+    display: none;
+}
+
 @media screen and (max-width: 1050px) {
     .cart-checkout-container {
         flex-direction: column;

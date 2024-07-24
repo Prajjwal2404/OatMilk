@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, useNavigation } from 'react-router-dom'
+import { Submitting } from '../Loading/Loading'
 import './Dialog.css'
 
 export default function Dialog({ refEl, closeRef, title, value, submiting, intent }) {
@@ -17,7 +18,7 @@ export default function Dialog({ refEl, closeRef, title, value, submiting, inten
                 <Form className={state === 'submitting' ? 'disable' : ''} method='post' replace preventScrollReset>
                     <input type='text' name='id' value={value} readOnly />
                     <button type='submit' className='confirm' name='intent' value={intent}>
-                        {state === 'submitting' ? submiting : 'Yes'}
+                        {state === 'submitting' ? <>{submiting}<Submitting /></> : 'Yes'}
                     </button>
                     <button type='button' onClick={closeConfirm} className='close'>No</button>
                 </Form>

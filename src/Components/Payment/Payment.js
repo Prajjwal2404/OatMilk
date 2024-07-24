@@ -4,12 +4,11 @@ import { IoCashOutline } from 'react-icons/io5'
 import { BiLinkExternal } from "react-icons/bi"
 import { PiWarningCircleFill } from "react-icons/pi"
 import { MdContentCopy } from "react-icons/md"
-import Loading from '../Loading/Loading'
-import Esewa from '../../Img/esewa.svg'
+import Loading, { Submitting } from '../Loading/Loading'
 import Fonepay from '../../Img/fonepay.svg'
 import './Payment.css'
 
-export default function Payment({ price, orderId, priceInfo, submitting, submit }) {
+export default function Payment({ price, discount, orderId, priceInfo, submitting, submit }) {
 
     const { state } = useNavigation()
     const [disable, setDisable] = useState(true)
@@ -20,13 +19,18 @@ export default function Payment({ price, orderId, priceInfo, submitting, submit 
             <div className="payment-method-container">
                 <Suspense fallback={<Loading />}>
                     <Await resolve={price}>
-                        {priceLoaded => <Content priceLoaded={priceLoaded} orderId={orderId} priceInfo={priceInfo}
-                            setDisable={setDisable} />}
+                        {priceLoaded => {
+                            const delivery = Number(process.env.REACT_APP_DELIVERY_FEES)
+                            const promotion = priceLoaded * discount / 100
+                            const totalPrice = priceLoaded + delivery - promotion
+                            return <Content priceLoaded={totalPrice} orderId={orderId} priceInfo={priceInfo}
+                                setDisable={setDisable} />
+                        }}
                     </Await>
                 </Suspense>
             </div>
             <button type='submit' className='add-btn' disabled={disable}>
-                {state === 'submitting' ? submitting : submit}
+                {state === 'submitting' ? <>{submitting}<Submitting /></> : submit}
             </button>
         </Form >
     )
@@ -55,7 +59,6 @@ function Content({ priceLoaded, orderId, priceInfo, setDisable }) {
             </label>
             <label>
                 <input type='radio' name='payment' value='Online Payment' required />
-                <img src={Esewa} alt='esewa' />
                 <img src={Fonepay} alt='fonepay' />
             </label>
             <div className="qr-container">

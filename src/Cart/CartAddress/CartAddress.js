@@ -10,14 +10,10 @@ export async function action({ request }) {
     const formData = await request.formData()
     const intent = formData.get('intent')
 
-    const currentuser = await queryClient.fetchQuery({
-        queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-        staleTime: Infinity, gcTime: Infinity
-    })
-
+    const currentuser = await queryClient.fetchQuery({ queryKey: ['currentuser'], queryFn: () => CurrentUser() })
     const userId = currentuser.uid
 
-    const orderId = JSON.parse(localStorage.getItem('cartData'))?.orderId ||
+    const orderId = JSON.parse(sessionStorage.getItem('cartData'))?.orderId ||
         `OBN${(Date.now() + Math.floor(Math.random() * 90 + 10)).toString().slice(-6)}${Math.floor(Math.random() * 90 + 10)}`
 
     const timeStamp = new Date().getTime()
@@ -28,7 +24,7 @@ export async function action({ request }) {
         let address = {
             fullName: formData.get('fullName'), phone: formData.get('phone'),
             street: formData.get('street'), city: formData.get('city'),
-            district: formData.get('district')
+            district: formData.get('district'), title: formData.get('title')
         }
         if (currentuser.isAnonymous) address = { ...address, email: formData.get('email') }
         if (formData.get('save')) {
@@ -37,13 +33,13 @@ export async function action({ request }) {
             await queryClient.invalidateQueries({ queryKey: ['userData'] })
         }
         const finalData = { ...data, address: address }
-        localStorage.setItem('cartData', JSON.stringify(finalData))
+        sessionStorage.setItem('cartData', JSON.stringify(finalData))
     }
 
     else if (intent === 'saved') {
         const address = JSON.parse(formData.get('saved-add'))
         const finalData = { ...data, address: address }
-        localStorage.setItem('cartData', JSON.stringify(finalData))
+        sessionStorage.setItem('cartData', JSON.stringify(finalData))
     }
 
     throw redirect('/buy/cart/payment')
@@ -52,11 +48,9 @@ export async function action({ request }) {
 export function loader() {
     return defer({
         dataSet: queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(res => queryClient.fetchQuery({
-            queryKey: ['userData'], queryFn: () => user(res.uid),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['userData'], queryFn: () => user(res.uid)
         }).then(resThis => {
             if (res.isAnonymous) return { isAnonymous: true, ...resThis }
             else return resThis

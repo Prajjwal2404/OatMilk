@@ -65,7 +65,8 @@
 }
 
 .message-btn-div button {
-    padding: 0.5rem 5rem;
+    width: 12.5rem;
+    padding: 0.5rem;
     border: none;
     border-radius: 10px;
     background-color: black;

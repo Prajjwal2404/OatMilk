@@ -11,15 +11,14 @@ export async function loader({ request }) {
     await RequireAuth(request)
     return defer({
         dataSet: queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(currentuser => queryClient.fetchQuery({
             queryKey: ['ordersData'], queryFn: async () => {
                 const ordersCollectionRef = collection(db, 'Orders')
                 const ordersDocsRef = query(ordersCollectionRef, where('userId', '==', currentuser.uid))
                 return getDocs(ordersDocsRef).then(res => res.docs.map(doc => ({ ...doc.data() }))
                     .sort((a, b) => b.timeStamp - a.timeStamp))
-            }, staleTime: Infinity, gcTime: Infinity
+            }
         }))
     })
 }
@@ -83,8 +82,7 @@ function Content({ dataSetLoaded }) {
 export function OrderCard({ orderData }) {
 
     const productNum = orderData.products.length - 1
-    const date = new Date(orderData.timeStamp.seconds * 1000 + (orderData.timeStamp.nanoseconds / 1000000))
-    const options = { day: 'numeric', month: 'long', year: 'numeric' }
+    const options = { day: 'numeric', month: 'short', year: 'numeric' }
 
     return (
         <NavLink to={orderData.orderId} className={({ isActive }) => isActive ? 'active' : ''} preventScrollReset>
@@ -97,7 +95,7 @@ export function OrderCard({ orderData }) {
                     `, +${productNum}` : ''}`}
             </h3>
             <div className='order-other-info-div'>
-                <p>{date.toLocaleDateString('en-IN', options)}</p>
+                <p>{orderData.timeStamp.toDate().toLocaleDateString('en-IN', options)}</p>
                 <p><span>Total:&nbsp;</span>रू&nbsp;{(orderData.totalPrice).toFixed(2)}</p>
             </div>
         </NavLink>

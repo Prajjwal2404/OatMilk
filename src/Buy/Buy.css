@@ -71,7 +71,7 @@
     color: #eaeaea;
     font-size: 0.7rem;
     font-weight: 600;
-    background-color: #000;
+    background-color: darksalmon;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -88,7 +88,6 @@
 }
 
 .buy-nav a.active.cart::after {
-    background-color: #eaeaea;
     color: #000;
 }
 
@@ -197,14 +196,10 @@
     }
 
     .cart:not([data-cartitems=''])::after {
+        color: #000;
         right: 50%;
         top: 0.25rem;
         transform: translateX(140%);
-    }
-
-    .buy-nav a.active.cart::after {
-        background-color: #000;
-        color: #eaeaea;
     }
 
     .outlet-wrapper {

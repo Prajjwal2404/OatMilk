@@ -19,7 +19,7 @@ export async function action({ request }) {
     await deleteDoc(subscriptionsDocRef)
     await queryClient.invalidateQueries({ queryKey: ['subscriptionsData'] })
     await queryClient.invalidateQueries({ queryKey: ['subscribed', { page: info.productId }] })
-    localStorage.removeItem('subscriptionData')
+    sessionStorage.removeItem('subscriptionData')
     return ++actionReturn
 }
 
@@ -27,8 +27,7 @@ export async function loader({ request }) {
     await RequireAuth(request, true)
     return defer({
         dataSet: queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(currentuser => {
             const subscriptionsCollectionRef = collection(db, 'Subscriptions')
             const subscriptionsDocsRef = query(subscriptionsCollectionRef, where('userId', '==', currentuser.uid))
@@ -40,8 +39,7 @@ export async function loader({ request }) {
                     return Promise.all(docData.map((data, idx) => product(data.productId).then(resThis => {
                         return { ...resThis, ...data, idx: idx }
                     })))
-                }),
-                staleTime: Infinity, gcTime: Infinity
+                })
             })
         })
     })
@@ -61,8 +59,7 @@ export default function Subscriptions() {
     const [manageSub, setManageSub] = useState(null)
     const ref = useRef([])
 
-    const milliseconds = manageSub?.startDate.seconds * 1000 + manageSub?.startDate.nanoseconds / 1000000
-    const options = { day: 'numeric', month: 'long', year: 'numeric' }
+    const options = { day: 'numeric', month: 'short', year: 'numeric' }
 
     function closeManage() {
         ref.current[0].classList.remove('show')
@@ -128,9 +125,9 @@ export default function Subscriptions() {
                         <p><span>Quantity:</span> {manageSub?.quantity}</p>
                         <p><span>Frequency:</span> {manageSub?.type}</p>
                         <p className='address-used'><span>Delivery Address:</span></p>
-                        <p><span>Start Date:</span> {(new Date(milliseconds)).toLocaleDateString('en-IN', options)}</p>
+                        <p><span>Start Date:</span> {manageSub?.startDate.toDate().toLocaleDateString('en-IN', options)}</p>
                         <div className='sub-add-div'>
-                            <h4>{manageSub?.address.fullName}</h4>
+                            <h4>{manageSub?.address.title}. {manageSub?.address.fullName}</h4>
                             <p>{manageSub?.address.street}</p>
                             <p>{manageSub?.address.city}, {manageSub?.address.district}</p>
                             <p>Phone number: {manageSub?.address.phone}</p>
@@ -142,7 +139,7 @@ export default function Subscriptions() {
             </div>
             <Dialog refEl={el => ref.current[1] = el} closeRef={ref.current[1]} title='Cancel Subscription?'
                 value={manageSub ? JSON.stringify({ docId: manageSub.docId, productId: manageSub.productId }) : ''}
-                submiting='Canceling...' intent='cancel' />
+                submiting='Canceling' intent='cancel' />
         </>
     )
 }

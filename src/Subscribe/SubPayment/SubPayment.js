@@ -11,23 +11,20 @@ import './SubPayment.css'
 export async function action({ request, params }) {
     const formData = await request.formData()
     const userId = await queryClient.fetchQuery({
-        queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-        staleTime: Infinity, gcTime: Infinity
+        queryKey: ['currentuser'], queryFn: () => CurrentUser()
     }).then(res => res.uid)
     const userData = await queryClient.fetchQuery({
-        queryKey: ['userData'], queryFn: () => user(userId),
-        staleTime: Infinity, gcTime: Infinity
+        queryKey: ['userData'], queryFn: () => user(userId)
     })
-    const quantity = Number(new URL(request.url).searchParams.get('quantity')) || 1
+    const quantity = Number(new URL(request.url).searchParams.get('quantity')) || 2
     const type = new URL(request.url).searchParams.get('type') || 'weekly'
     const products = await queryClient.fetchQuery({
-        queryKey: [params.id], queryFn: () => product(params.id),
-        staleTime: Infinity, gcTime: Infinity
+        queryKey: [params.id], queryFn: () => product(params.id)
     }).then(res => ([{
         productId: res.id, productImg: res.img[0], title: res.title,
         size: res.sizes[0], price: res.price, quantity: quantity
     }]))
-    const subscribeData = JSON.parse(localStorage.getItem('subscriptionData'))
+    const subscribeData = JSON.parse(sessionStorage.getItem('subscriptionData'))
     const address = subscribeData.address
     const orderId = subscribeData.orderId
     const paymentMode = formData.get('payment')
@@ -37,7 +34,7 @@ export async function action({ request, params }) {
     await queryClient.invalidateQueries({ queryKey: ['subscriptionsData'] })
     await queryClient.invalidateQueries({ queryKey: ['ordersData'] })
     await queryClient.invalidateQueries({ queryKey: ['subscribed', { page: products[0].productId }] })
-    localStorage.removeItem('subscriptionData')
+    sessionStorage.removeItem('subscriptionData')
     throw redirect(`/buy/details/${params.id}/subscribe?success=1`)
 }
 
@@ -59,33 +56,27 @@ async function placeSubscription(products, type, userId, address, orderId, payme
 }
 
 export function loader({ request, params }) {
-    const checkKey = localStorage.getItem('subscriptionData')
-    const quantity = new URL(request.url).searchParams.get('quantity') || 1
+    const checkKey = sessionStorage.getItem('subscriptionData')
+    const quantity = new URL(request.url).searchParams.get('quantity') || 2
     if (!checkKey) {
         const type = new URL(request.url).searchParams.get('type') || 'weekly'
         throw redirect(`/buy/details/${params.id}/subscribe?type=${type}&quantity=${quantity}`)
     }
     else return defer({
-        totalPrice: queryClient.fetchQuery({
-            queryKey: [params.id], queryFn: () => product(params.id),
-            staleTime: Infinity, gcTime: Infinity
+        price: queryClient.fetchQuery({
+            queryKey: [params.id], queryFn: () => product(params.id)
         }).then(res => {
             if (!res) return null
-            const subtotal = res.price * Number(quantity)
-            const delivery = Number(process.env.REACT_APP_DELIVERY_FEES)
-            const deliveryInc = Number(process.env.REACT_APP_DELIVERY_FEES_INCREMENT)
-            const totalDelivery = delivery + ((Math.ceil(res.weight * Number(quantity) / 1000) - 1) * deliveryInc)
-            const promotion = Number(process.env.REACT_APP_DISCOUNT_AMOUNT)
-            return subtotal + totalDelivery - promotion
+            return res.price * Number(quantity)
         }), subscriptionData: JSON.parse(checkKey)
     })
 }
 
 export default function SubPayment() {
 
-    const { totalPrice, subscriptionData } = useLoaderData()
+    const { price, subscriptionData } = useLoaderData()
 
-    const { searchData } = useOutletContext()
+    const { searchData, discount } = useOutletContext()
 
     const { id } = useParams()
 
@@ -96,6 +87,6 @@ export default function SubPayment() {
             <PiWarningCircleFill className='already-placed-icon' />
             <h2>Already Subscribed</h2>
             <Link to={'/buy/subscriptions'} className='add-btn'>Go to Subscriptions</Link>
-        </div> : <Payment price={totalPrice} orderId={subscriptionData.orderId} priceInfo={priceInfo}
-            submitting='Subscribing...' submit='Subscribe' />
+        </div> : <Payment price={price} discount={discount} orderId={subscriptionData.orderId}
+            priceInfo={priceInfo} submitting='Subscribing' submit='Subscribe' />
 }

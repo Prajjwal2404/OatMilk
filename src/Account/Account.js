@@ -4,7 +4,7 @@ import { Await, Form, defer, useActionData, useLoaderData, useNavigate, useNavig
 import { signOut } from 'firebase/auth'
 import { auth, db, queryClient, user } from '../Db/FirebaseConfig'
 import RequireAuth, { CurrentUser } from '../Utils/HandleUser'
-import Loading from '../Components/Loading/Loading'
+import Loading, { Submitting } from '../Components/Loading/Loading'
 import { BiEdit } from "react-icons/bi"
 import { IoCloseCircle } from "react-icons/io5"
 import { RxQuestionMarkCircled } from "react-icons/rx"
@@ -15,8 +15,7 @@ let actionReturn = 0
 export async function action({ request }) {
     const formData = await request.formData()
     const userId = await queryClient.fetchQuery({
-        queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-        staleTime: Infinity, gcTime: Infinity
+        queryKey: ['currentuser'], queryFn: () => CurrentUser()
     }).then(res => res.uid)
     const userObj = await queryClient.fetchQuery({ queryKey: ['userData'], queryFn: () => user(userId) })
     const name = formData.get('nameInput')
@@ -32,13 +31,11 @@ export async function loader({ request }) {
     await RequireAuth(request)
     return defer({
         dataSet: queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(res => {
             if (res.isAnonymous) return { isAnonymous: true }
             else return queryClient.fetchQuery({
-                queryKey: ['userData'], queryFn: () => user(res.uid),
-                staleTime: Infinity, gcTime: Infinity
+                queryKey: ['userData'], queryFn: () => user(res.uid)
             })
         })
     })
@@ -76,6 +73,8 @@ function Anonymous() {
         await queryClient.invalidateQueries({ queryKey: ['subscriptionsData'] })
         await queryClient.invalidateQueries({ queryKey: ['cartItems'] })
         await queryClient.invalidateQueries({ queryKey: ['ordersData'] })
+        queryClient.removeQueries({ queryKey: 'subDiscount' })
+        queryClient.removeQueries({ queryKey: 'cartDiscount' })
         await signOut(auth)
         navigate('/buy')
     }
@@ -102,7 +101,7 @@ function NotAnonymous({ dataSetLoaded }) {
 
     const actionData = useActionData()
     const navigate = useNavigate()
-    const navigation = useNavigation()
+    const { state } = useNavigation()
     const ref = useRef()
 
     const [editName, setEditName] = useState(false)
@@ -133,6 +132,8 @@ function NotAnonymous({ dataSetLoaded }) {
         await queryClient.invalidateQueries({ queryKey: ['subscriptionsData'] })
         await queryClient.invalidateQueries({ queryKey: ['cartItems'] })
         await queryClient.invalidateQueries({ queryKey: ['ordersData'] })
+        queryClient.removeQueries({ queryKey: 'subDiscount' })
+        queryClient.removeQueries({ queryKey: 'cartDiscount' })
         await signOut(auth)
         navigate('/buy')
     }
@@ -140,14 +141,14 @@ function NotAnonymous({ dataSetLoaded }) {
     return (
         <div className='user-info-container'>
             <h1>Account details</h1>
-            <Form method='post' className={navigation.state === 'submitting' ? 'user-info-div disable' : 'user-info-div'}
+            <Form method='post' className={state === 'submitting' ? 'user-info-div disable' : 'user-info-div'}
                 replace preventScrollReset>
                 <h3>Full name</h3>
                 <div className='user-input-div'>
                     <input type='text' name='nameInput' value={name} readOnly />
                     <p contentEditable={editName} ref={ref} onBlur={el => setName(el.target.textContent)}
                         suppressContentEditableWarning>{name}</p>
-                    {editName ? <><button type='submit'>{navigation.state === 'submitting' ? 'Updating...' : 'Update'}
+                    {editName ? <><button type='submit'>{state === 'submitting' ? <>Updating<Submitting /></> : 'Update'}
                     </button><IoCloseCircle className='edit-close-icon' onClick={nameChanged} /></> :
                         <BiEdit className='user-edit-icon' onClick={nameChange} />}
                 </div>

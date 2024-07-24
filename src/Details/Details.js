@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext, useParams, Link, Await, defer, useLoader
 import { Timestamp, arrayUnion, collection, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore/lite'
 import { auth, db, product, queryClient, user } from '../Db/FirebaseConfig'
 import { signInAnonymously } from 'firebase/auth'
-import Loading from '../Components/Loading/Loading'
+import Loading, { Submitting } from '../Components/Loading/Loading'
 import ImgSlider from './ImgSlider/ImgSlider'
 import Rating from '../Components/Rating/Rating'
 import Quantity from '../Components/Quantity/Quantity'
@@ -22,8 +22,7 @@ export async function action({ request, params }) {
     const intent = formData.get('intent')
     if (intent === 'cart') {
         const userId = await queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(res => res.uid)
         const userDocRef = doc(db, 'Users', userId)
         await updateDoc(userDocRef, {
@@ -52,8 +51,7 @@ export async function action({ request, params }) {
         const rating = Number(formData.get('rating'))
         const review = formData.get('review')
         const userId = await queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(res => res.uid)
         const username = (await user(userId)).username
         const reviewDocRef = doc(db, 'Reviews', `${userId}_${sno}`)
@@ -76,8 +74,7 @@ async function updateAverageRating(params) {
             const q = query(reviewCollectionRef, where('productId', '==', params.id))
             return getDocs(q).then(res => res.docs.map(doc => ({ ...doc.data() })).sort((a, b) =>
                 b.timeStamp - a.timeStamp))
-        },
-        staleTime: Infinity, gcTime: Infinity
+        }
     })
     let total = 0
     reviewArr.forEach(({ rating }) => total += rating)
@@ -87,15 +84,13 @@ async function updateAverageRating(params) {
 
 export async function loader({ params }) {
     const userId = await queryClient.fetchQuery({
-        queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-        staleTime: Infinity, gcTime: Infinity
+        queryKey: ['currentuser'], queryFn: () => CurrentUser()
     }).then(res => { if (res?.uid) return res.uid; else return false })
 
     return defer({
         dataSet: Promise.all([
             queryClient.fetchQuery({
-                queryKey: [params.id], queryFn: () => product(params.id),
-                staleTime: Infinity, gcTime: Infinity
+                queryKey: [params.id], queryFn: () => product(params.id)
             }),
             userId ? queryClient.fetchQuery({
                 queryKey: ['subscribed', { page: params.id }],
@@ -103,15 +98,14 @@ export async function loader({ params }) {
                     const subscriptionsCollectionRef = collection(db, 'Subscriptions')
                     const subscriptionsDocsRef = query(subscriptionsCollectionRef, where('userId', '==', userId), where('productId', '==', params.id))
                     return getDocs(subscriptionsDocsRef)
-                }, staleTime: Infinity, gcTime: Infinity
+                }
             }).then(res => !res.empty) : false,
             userId ? queryClient.fetchQuery({
-                queryKey: ['userData'], queryFn: () => user(userId),
-                staleTime: Infinity, gcTime: Infinity
+                queryKey: ['userData'], queryFn: () => user(userId)
             }).then(res => {
                 const inCart = res.cart.find(({ productId }) => productId === params.id)
-                return inCart ? true : false
-            }) : false
+                return { inCart: inCart ? true : false, isVerified: res.isVerified ? true : false }
+            }) : { inCart: false, isVerified: 'noUser' }
         ]),
         reviews: queryClient.fetchQuery({
             queryKey: ['reviews', { page: params.id }], queryFn: async () => {
@@ -119,8 +113,7 @@ export async function loader({ params }) {
                 const q = query(reviewCollectionRef, where('productId', '==', params.id))
                 return getDocs(q).then(res => res.docs.map(doc => ({ ...doc.data() })).sort((a, b) =>
                     b.timeStamp - a.timeStamp))
-            },
-            staleTime: Infinity, gcTime: Infinity
+            }
         }),
         loggedIn: userId ? true : false
     })
@@ -141,7 +134,7 @@ export default function Details() {
 
 function Content({ dataSetLoaded, reviews, loggedIn }) {
 
-    const [productLoaded, subscribed, inCart] = dataSetLoaded
+    const [productLoaded, subscribed, userInfo] = dataSetLoaded
 
     const outlet = useOutletContext()
 
@@ -161,7 +154,7 @@ function Content({ dataSetLoaded, reviews, loggedIn }) {
 
     const { id } = useParams()
 
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(2)
 
     const [size, setSize] = useState(productLoaded?.sizes[0])
 
@@ -206,10 +199,7 @@ function Content({ dataSetLoaded, reviews, loggedIn }) {
                     <div className='rating-div'><Rating rating={productLoaded.rating} className='details-rating' /></div>
                     <p>({productLoaded.review}&nbsp;review{productLoaded.review < 2 ? '' : 's'})</p>
                 </div>
-                <div className="price-wt">
-                    <h2>रू&nbsp;{(productLoaded.price).toFixed(2)}&nbsp;&nbsp;<span>incl.&nbsp;taxes</span></h2>
-                    <h3>wt.&nbsp;{productLoaded.weight}g</h3>
-                </div>
+                <h2>रू&nbsp;{(productLoaded.price).toFixed(2)}&nbsp;<span>/&nbsp;bottle&nbsp;&nbsp;&nbsp;(incl. taxes)</span></h2>
                 <p>{productLoaded.description}</p>
                 <div className="quantity-size">
                     <Quantity quantity={quantity} setQuantity={setQuantity} />
@@ -232,35 +222,37 @@ function Content({ dataSetLoaded, reviews, loggedIn }) {
                     </div>}
                     <p>Never run out of product. Cancel anytime.</p>
                 </div>
-                {subscribe && !subscribed ? <button type='button' onClick={proceed}>Proceed to Checkout
-                    <BsForwardFill size='1.25rem' /></button> : inCart ?
-                    <button type='button' disabled><BsCartCheckFill />Added to Cart</button> :
-                    loggedIn ? <Form className='add-to-cart-form' method='post' replace preventScrollReset>
-                        <input type='number' name='quantity' value={quantity} readOnly />
-                        <button type='submit' name='intent' value='cart'><BsCartFill />
-                            {state !== 'idle' && formData?.get('intent') === 'cart' ? 'Adding...' : 'Add to Cart'}
-                        </button>
-                    </Form> : <>
-                        <button type='button' onClick={loginOptions}><BsCartFill />
-                            {state !== 'idle' && formData?.get('intent') === 'guest' ? 'Adding...' : 'Add to Cart'}
-                        </button>
-                        <div className="dialog-wrapper">
-                            <div className="login-options-container" ref={ref}>
-                                <span className='login-options-close' onClick={loginOptions}><IoClose /></span>
-                                <button type='button' onClick={login}>Login to Continue</button>
-                                <p>- Or Continue as -</p>
-                                <Form method='post' replace preventScrollReset>
-                                    <input type='number' name='quantity' value={quantity} readOnly />
-                                    <button type='submit' name='intent' value='guest' onClick={loginOptions}>
-                                        <IoPersonSharp size='1.1rem' />Guest
-                                    </button>
-                                </Form>
+                {productLoaded.stock < quantity ? <button type='button' disabled>
+                    {productLoaded.stock > 1 ? 'Quantity Unavailable' : 'Out of Stock'}</button> :
+                    subscribe && !subscribed ? <button type='button' onClick={proceed}>Proceed to Checkout
+                        <BsForwardFill size='1.25rem' /></button> : userInfo.inCart ?
+                        <button type='button' disabled><BsCartCheckFill />Added to Cart</button> :
+                        loggedIn ? <Form className='add-to-cart-form' method='post' replace preventScrollReset>
+                            <input type='number' name='quantity' value={quantity} readOnly />
+                            <button type='submit' name='intent' value='cart'><BsCartFill />
+                                {state !== 'idle' && formData?.get('intent') === 'cart' ? <span>Adding<Submitting /></span> : 'Add to Cart'}
+                            </button>
+                        </Form> : <>
+                            <button type='button' onClick={loginOptions}><BsCartFill />
+                                {state !== 'idle' && formData?.get('intent') === 'guest' ? <span>Adding<Submitting /></span> : 'Add to Cart'}
+                            </button>
+                            <div className="dialog-wrapper">
+                                <div className="login-options-container" ref={ref}>
+                                    <span className='login-options-close' onClick={loginOptions}><IoClose /></span>
+                                    <button type='button' onClick={login}>Login to Continue</button>
+                                    <p>- Or Continue as -</p>
+                                    <Form method='post' replace preventScrollReset>
+                                        <input type='number' name='quantity' value={quantity} readOnly />
+                                        <button type='submit' name='intent' value='guest' onClick={loginOptions}>
+                                            <IoPersonSharp size='1.1rem' />Guest
+                                        </button>
+                                    </Form>
+                                </div>
                             </div>
-                        </div>
-                    </>}
+                        </>}
                 <h2>Customer Reviews</h2>
                 <div className="reviews-wrapper">
-                    <Review reviews={reviews} sno={productLoaded.Sno} />
+                    <Review reviews={reviews} sno={productLoaded.Sno} isVerified={userInfo.isVerified} />
                 </div>
             </div>
         </div>

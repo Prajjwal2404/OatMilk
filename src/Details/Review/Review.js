@@ -2,11 +2,11 @@ import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Await, Form, useActionData, useNavigation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
-import Loading from '../../Components/Loading/Loading'
+import Loading, { Submitting } from '../../Components/Loading/Loading'
 import Rating from '../../Components/Rating/Rating'
 import './Review.css'
 
-export default function Review({ reviews, sno }) {
+export default function Review({ reviews, sno, isVerified }) {
 
     const ref = useRef()
     const { state, formData } = useNavigation()
@@ -20,6 +20,13 @@ export default function Review({ reviews, sno }) {
         }
     }, [actionData])
 
+    function checkVerified(event) {
+        if (isVerified === 'noUser' || isVerified) ref.current.setCustomValidity('')
+        else ref.current.setCustomValidity('Only verified users can add a review, complete an order flow to get verified')
+        ref.current.reportValidity()
+        if (!event.target.checkValidity()) event.preventDefault()
+    }
+
     return (
         <>
             <div className='reviews-container'>
@@ -29,13 +36,14 @@ export default function Review({ reviews, sno }) {
                     </Await>
                 </Suspense>
             </div>
-            <Form method='post' className={`review-submit ${state === 'submitting' ? 'disable' : ''}`} replace>
+            <Form method='post' className={`review-submit ${state === 'submitting' ? 'disable' : ''}`} replace
+                preventScrollReset onSubmit={checkVerified}>
                 <div className='rating-container-div'>
                     <div className='rating-container'>
                         <StarRating rating={rating} setRating={setRating} />
                     </div>
                     <button type='submit' name='intent' value='review'>
-                        {state === 'submitting' && formData.get('intent') === 'review' ? 'Submitting...' : 'Submit'}
+                        {state === 'submitting' && formData?.get('intent') === 'review' ? <>Submitting<Submitting /></> : 'Submit'}
                     </button>
                 </div>
                 <input type='text' name='sno' value={sno} readOnly />

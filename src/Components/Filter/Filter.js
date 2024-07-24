@@ -2,12 +2,8 @@ import React from 'react'
 import './Filter.css'
 
 export default function Filter({ handleCategory, productList, selected, extras }) {
-    let productCategory = []
-    if (extras) productCategory = extras
-    productList.forEach(product => {
-        if (!productCategory.includes(product.category)) productCategory.push(product.category)
-    })
-    let products = productCategory.map((category, idx) =>
+    const productCategory = [...extras || [], ...Array.from(new Set(productList.map(({ category }) => category)))]
+    const products = productCategory.map((category, idx) =>
         <CategoryItem key={idx} value={category} title={category} handleCategory={handleCategory} selected={selected} />)
 
     return (

@@ -3,6 +3,7 @@ import { Form, useNavigation, useActionData } from 'react-router-dom'
 import { addDoc, collection } from 'firebase/firestore/lite'
 import { db } from '../../Db/FirebaseConfig'
 import OatDoodle from '../../Illustrations/OatDoodle'
+import { Submitting } from '../Loading/Loading'
 import { IoMailOutline, IoPersonOutline } from "react-icons/io5"
 import { BiMessageSquareEdit } from "react-icons/bi"
 import './Message.css'
@@ -62,7 +63,7 @@ export default function Message() {
                 </div>
                 <div className='message-btn-div'>
                     <button type='submit' name='intent' value='send'>
-                        {state === 'submitting' ? 'Sending...' : 'Send'}
+                        {state === 'submitting' ? <>Sending<Submitting /></> : 'Send'}
                     </button>
                     {actionData && state === 'idle' && <h4>Message sent!</h4>}
                 </div>

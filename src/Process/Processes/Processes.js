@@ -10,6 +10,7 @@ import Salt from '../../Illustrations/Salt'
 import Oil from '../../Illustrations/Oil'
 import Bonfire from '../../Illustrations/Bonfire'
 import Filling from '../../Illustrations/Filling'
+import OatMilk from '../../Img/oatmilk.webp'
 import useRem from '../../Utils/Rem'
 import './Processes.css'
 
@@ -188,7 +189,7 @@ export default function Processes() {
                 </div>
             </div>
             <div className="final-product">
-                <img src='https://firebasestorage.googleapis.com/v0/b/nush-oats.appspot.com/o/Product-Images%2Foatmilk%2Foatmilk500mlfront.webp?alt=media&token=f96a7442-066d-4eec-ab67-d0fef6b6624e' alt="OatMilk" />
+                <img src={OatMilk} alt="OatMilk" />
                 <h1>And it's all worth it!</h1>
             </div>
         </>

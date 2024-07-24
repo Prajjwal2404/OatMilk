@@ -48,7 +48,7 @@ export default function OrderDetails() {
                         <h3>{orderData.paymentMode}</h3>
                     </div>
                     <div className='delivery-address-div'>
-                        <h4>{orderData.address.fullName}</h4>
+                        <h4>{orderData.address.title}. {orderData.address.fullName}</h4>
                         <p>{orderData.address.street}</p>
                         <p>{orderData.address.city}, {orderData.address.district}</p>
                         <p>Phone number: {orderData.address.phone}</p>

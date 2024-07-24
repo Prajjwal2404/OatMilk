@@ -10,6 +10,10 @@
     margin-bottom: 2rem;
 }
 
+.subscribe-container:has(.out-of-stock) .subscribe-nav-div nav {
+    pointer-events: none;
+}
+
 .subscribe-nav-div {
     width: 100%;
     display: flex;
@@ -97,15 +101,23 @@
 
 @media screen and (max-width: 750px) {
     .subscribe-nav-div {
-        padding-top: 1.5rem;
+        padding-left: 0.5rem;
     }
 
     .subscribe-nav-div.cartnav {
-        padding-top: 0;
+        padding-left: 0;
     }
 
     .subscribe-back-icon {
-        top: -1rem;
-        translate: 0 0;
+        left: -0.5rem;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+    .subscribe-back-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 1.125rem;
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { NavLink, Outlet, useParams, useSearchParams, Link } from 'react-router-dom'
 import { queryClient } from '../../Db/FirebaseConfig'
 import RequireAuth, { CurrentUser } from '../../Utils/HandleUser'
@@ -7,22 +7,31 @@ import './SubscribeNav.css'
 
 export async function loader({ request, params }) {
     await RequireAuth(request, true)
-    const checkKey = localStorage.getItem('subscriptionData')
+    const checkKey = sessionStorage.getItem('subscriptionData')
     if (checkKey) {
-        const userId = await queryClient.fetchQuery({ queryKey: ['currentuser'], queryFn: () => CurrentUser(), staleTime: Infinity, gcTime: Infinity }).then(res => res.uid)
+        const userId = await queryClient.fetchQuery({
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
+        }).then(res => res.uid)
         const keyData = JSON.parse(checkKey)
         const currentTime = new Date().getTime()
         const expireTime = keyData.timeStamp + 600000
-        if (keyData.productId !== params.id || keyData.userId !== userId || currentTime > expireTime)
-            localStorage.removeItem('subscriptionData')
+        if (keyData.productId !== params.id || keyData.userId !== userId || currentTime > expireTime) {
+            sessionStorage.removeItem('subscriptionData')
+            queryClient.removeQueries({ queryKey: 'subDiscount' })
+        }
     }
     return null
 }
 
 export default function SubscribeNav() {
 
+    const stateData = queryClient.getQueryData('subDiscount')
     const { id } = useParams()
     const [searchParams] = useSearchParams()
+    const [discount, setDiscount] = useState(0)
+
+    useLayoutEffect(() => { if (stateData) setDiscount(stateData) }, [])
+    useEffect(() => { queryClient.setQueryData('subDiscount', discount) }, [discount])
 
     if (searchParams.get('success') === '1') {
         return (
@@ -34,7 +43,7 @@ export default function SubscribeNav() {
         )
     }
 
-    const searchData = `?type=${searchParams.get('type') || 'weekly'}&quantity=${searchParams.get('quantity') || 1}`
+    const searchData = `?type=${searchParams.get('type') || 'weekly'}&quantity=${searchParams.get('quantity') || 2}`
 
     return (
         <div className='subscribe-container'>
@@ -54,7 +63,7 @@ export default function SubscribeNav() {
                     </NavLink>
                 </nav>
             </div>
-            <Outlet context={{ searchData }} />
+            <Outlet context={{ searchData, discount, setDiscount }} />
         </div>
     )
 }

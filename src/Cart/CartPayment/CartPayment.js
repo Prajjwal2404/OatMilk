@@ -1,5 +1,5 @@
 import React from 'react'
-import { defer, redirect, useLoaderData } from 'react-router-dom'
+import { defer, redirect, useLoaderData, useOutletContext } from 'react-router-dom'
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore/lite'
 import { db, product, queryClient, user } from '../../Db/FirebaseConfig'
 import { CurrentUser } from '../../Utils/HandleUser'
@@ -8,26 +8,20 @@ import Email from '../../Utils/Email'
 
 export async function action({ request }) {
     const formData = await request.formData()
-    const currentuser = await queryClient.fetchQuery({
-        queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-        staleTime: Infinity, gcTime: Infinity
-    })
+    const currentuser = await queryClient.fetchQuery({ queryKey: ['currentuser'], queryFn: () => CurrentUser() })
     const userId = currentuser.uid
-    const userData = await queryClient.fetchQuery({
-        queryKey: ['userData'], queryFn: () => user(userId),
-        staleTime: Infinity, gcTime: Infinity
-    })
+    const userData = await queryClient.fetchQuery({ queryKey: ['userData'], queryFn: () => user(userId) })
     const products = await queryClient.fetchQuery({
         queryKey: ['cartItems'], queryFn: () => {
             return Promise.all(userData.cart.map((item, idx) => product(item.productId).then(resThis => {
                 return { ...resThis, quantity: item.quantity, idx: idx }
             })))
-        }, staleTime: Infinity, gcTime: Infinity
+        }
     }).then(res => res.map(item => ({
         productId: item.id, productImg: item.img[0], title: item.title,
         size: item.sizes[0], price: item.price, quantity: item.quantity
     })))
-    const cartData = JSON.parse(localStorage.getItem('cartData'))
+    const cartData = JSON.parse(sessionStorage.getItem('cartData'))
     const address = cartData.address
     const orderId = cartData.orderId
     const paymentMode = formData.get('payment')
@@ -39,7 +33,7 @@ export async function action({ request }) {
     await queryClient.invalidateQueries({ queryKey: ['userData'] })
     await queryClient.invalidateQueries({ queryKey: ['cartItems'] })
     await queryClient.invalidateQueries({ queryKey: ['ordersData'] })
-    localStorage.removeItem('cartData')
+    sessionStorage.removeItem('cartData')
     throw redirect('/buy/cart?success=1')
 }
 
@@ -57,41 +51,34 @@ async function placeOrder(products, userId, address, orderId, paymentMode, total
 }
 
 export function loader() {
-    const checkKey = localStorage.getItem('cartData')
+    const checkKey = sessionStorage.getItem('cartData')
     if (!checkKey) throw redirect('/buy/cart')
     else return defer({
-        totalPrice: queryClient.fetchQuery({
-            queryKey: ['currentuser'], queryFn: () => CurrentUser(),
-            staleTime: Infinity, gcTime: Infinity
+        price: queryClient.fetchQuery({
+            queryKey: ['currentuser'], queryFn: () => CurrentUser()
         }).then(res => queryClient.fetchQuery({
-            queryKey: ['userData'], queryFn: () => user(res.uid),
-            staleTime: Infinity, gcTime: Infinity
+            queryKey: ['userData'], queryFn: () => user(res.uid)
         })).then(res => queryClient.fetchQuery({
             queryKey: ['cartItems'], queryFn: () => {
                 return Promise.all(res.cart.map((item, idx) => product(item.productId).then(resThis => {
                     return { ...resThis, quantity: item.quantity, idx: idx }
                 })))
-            }, staleTime: Infinity, gcTime: Infinity
+            }
         })).then(res => {
             let subtotal = 0
-            let totalWeight = 0
             res.forEach(item => {
                 subtotal += (item.price * item.quantity)
-                totalWeight += (item.weight * item.quantity / 1000)
             })
-            const delivery = Number(process.env.REACT_APP_DELIVERY_FEES)
-            const deliveryInc = Number(process.env.REACT_APP_DELIVERY_FEES_INCREMENT)
-            const totalDelivery = delivery + ((Math.ceil(totalWeight) - 1) * deliveryInc)
-            const promotion = Number(process.env.REACT_APP_DISCOUNT_AMOUNT)
-            return subtotal + totalDelivery - promotion
+            return subtotal
         }), cartData: JSON.parse(checkKey)
     })
 }
 
 export default function CartPayment() {
 
-    const { totalPrice, cartData } = useLoaderData()
+    const { price, cartData } = useLoaderData()
+    const { discount } = useOutletContext()
 
-    return <Payment price={totalPrice} orderId={cartData.orderId} priceInfo='/buy/cart'
-        submitting='Ordering...' submit='Place Order' />
+    return <Payment price={price} discount={discount} orderId={cartData.orderId} priceInfo='/buy/cart'
+        submitting='Ordering' submit='Place Order' />
 }

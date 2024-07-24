@@ -123,7 +123,7 @@ export const faqs = [
         id: 18,
         category: "delivery",
         question: <p><strong>Are there any delivery fees?</strong></p>,
-        answer: <p>Yes, delivery fees are Rs 100 for customers within the Ring Road in Kathmandu and Rs 120 for those outside the Ring Road but still within the valley. We appreciate your patience as we work towards extending our services to customers outside Kathmandu.</p>
+        answer: <p>Yes, delivery fees is रू&nbsp;{Number(process.env.REACT_APP_DELIVERY_FEES).toFixed(2)} for customers in Kathmandu valley. We appreciate your patience as we work towards extending our services to customers outside Kathmandu.</p>
     },
     {
         id: 19,

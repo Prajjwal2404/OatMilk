@@ -6,18 +6,18 @@ import './Quantity.css'
 export default function Quantity({ quantity, setQuantity, showRemove, removeFn }) {
 
     function handleMinus() {
-        if (quantity > 1) setQuantity(prevQuantity => prevQuantity - 1)
+        if (quantity > 2) setQuantity(prevQuantity => prevQuantity - 2)
     }
 
     function handlePlus() {
-        if (quantity < 12) setQuantity(prevQuantity => prevQuantity + 1)
+        if (quantity < 24) setQuantity(prevQuantity => prevQuantity + 2)
     }
 
     return (
         <div className='quantity-container'>
             <p>Quantity</p>
             <div className='quantity-div'>
-                {showRemove && quantity === 1 ?
+                {showRemove && quantity === 2 ?
                     <span onClick={removeFn}><IoTrashOutline /></span> :
                     <span onClick={handleMinus}><AiOutlineMinus className='quantity-icon' />
                     </span>}
