@@ -25,7 +25,7 @@
 }
 
 .about-intro img {
-    width: 25rem;
+    width: min(25rem, 100%);
 }
 
 .about-mission {

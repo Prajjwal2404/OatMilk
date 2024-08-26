@@ -15,7 +15,7 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(webp|svg)",
+        "source": "**/*.@(webp|svg|ttf)",
         "headers": [
           {
             "key": "Cache-Control",

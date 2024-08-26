@@ -10,7 +10,7 @@ export default function AboutIntro() {
             <div className='about-intro-container'>
                 <div className='about-intro-wrapper'>
                     <div className='about-intro'>
-                        <img src={mission} />
+                        <img src={mission} alt='mission' />
                         <div className='about-mission'>
                             <h1>Our Mission</h1>
                             <p>At Oats by Nush, we are dedicated to pioneering
@@ -42,7 +42,7 @@ export default function AboutIntro() {
                                 aspects of our operations, we aim to foster a better
                                 world where both people and the planet thrive.</p>
                         </div>
-                        <img src={vision} />
+                        <img src={vision} alt='vision' />
                     </div>
                 </div>
             </div>
