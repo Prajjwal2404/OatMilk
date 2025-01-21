@@ -70,7 +70,7 @@ function Content({ priceLoaded, orderId, priceInfo, setDisable }) {
                 <p className='remarks'><PiWarningCircleFill />Please add the following in remarks -</p>
                 <div className='order-id-div'>
                     <p className='orderid' ref={ref}>Order: #{orderId}</p>
-                    <MdContentCopy title='copy' className='copy-icon' onClick={copyOrderId} />
+                    <MdContentCopy title='Copy' className='copy-icon' onClick={copyOrderId} />
                 </div>
             </div>
         </>

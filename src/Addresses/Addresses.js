@@ -182,7 +182,7 @@ function Content({ addressDataLoaded, isAnonymous }) {
                         replace preventScrollReset>
                         <button type='button' className='autofill adds' disabled={location}
                             onClick={() => AutoFill(ref, setLocation, setDistrict)}><IoLocationSharp />
-                            {location ? 'Getting location...' : 'Autofill using current location'}
+                            {location ? <span>Getting location<Submitting /></span> : 'Autofill using current location'}
                         </button>
                         <input type='number' name='idx' value={addIdx} readOnly />
                         <div className='fullName-div'>

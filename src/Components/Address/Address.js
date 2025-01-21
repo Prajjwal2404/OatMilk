@@ -31,7 +31,7 @@ export default function Address({ dataSet }) {
                 replace preventScrollReset>
                 <button type='button' className='autofill' onClick={() => AutoFill(ref, setLocation, setDistrict)}
                     disabled={location}><IoLocationSharp />
-                    {location ? 'Getting location...' : 'Autofill using current location'}
+                    {location ? <span>Getting location<Submitting /></span> : 'Autofill using current location'}
                 </button>
                 <div className='fullName-div'>
                     <input type='text' name='title' value={title} readOnly />
