@@ -47,6 +47,7 @@
 
 .message-form textarea {
     resize: vertical;
+    min-height: 2.25rem;
 }
 
 .input-icon {

@@ -133,6 +133,7 @@
 .review-submit>textarea {
     font-size: 1rem;
     resize: vertical;
+    min-height: 2.25rem;
     width: 100%;
     border-radius: 10px;
     border: none;

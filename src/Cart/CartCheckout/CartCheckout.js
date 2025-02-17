@@ -224,7 +224,7 @@ function CartItem({ itemData, setIdx, removeRef, setInStock }) {
     useEffect(() => {
         if (quantity > itemData.stock) setInStock(prevInStock => ({ ...prevInStock, [itemData.id]: false }))
         else if (quantity <= itemData.stock) setInStock(prevInStock => ({ ...prevInStock, [itemData.id]: true }))
-    }, [quantity])
+    }, [quantity, itemData])
 
     function showRemove() {
         removeRef.current.classList.add('show')
